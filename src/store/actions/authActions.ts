@@ -21,7 +21,7 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
   'auth/signInAsyncAction',
   async (
     { email, password, onSuccess }: ISignInAsyncAction,
-    { getState, dispatch }
+    { dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
@@ -53,7 +53,7 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
       avatar,
       onSuccess,
     }: ISignUpAsyncAction,
-    { getState, dispatch }
+    { dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));

@@ -46,7 +46,7 @@ export const setLoadingAction = createAction<ISetLoadingAction>(
 
 export const fetchTasksAsyncAction = createAsyncThunk(
   'tasks/fetchTasksAsyncAction',
-  async (_, { getState, dispatch }) => {
+  async (_, { dispatch }) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchTasksApi();
@@ -74,7 +74,7 @@ export const createTaskAsyncAction = createAsyncThunk<
       files,
       onSuccess,
     }: ICreateTaskAsyncAction,
-    { getState, dispatch }
+    { dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
@@ -152,7 +152,7 @@ export const deleteTaskAsyncAction = createAsyncThunk<
   'tasks/deleteTaskAsyncAction',
   async (
     { taskId, onSuccess }: IDeleteTaskAsyncAction,
-    { getState, dispatch }
+    { dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));

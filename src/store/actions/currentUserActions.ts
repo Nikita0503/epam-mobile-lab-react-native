@@ -26,7 +26,7 @@ export const setLoadingAction = createAction<ISetLoadingAction>(
 
 export const fetchCurrentUserAsyncAction = createAsyncThunk(
   'currentUser/fetchCurrentUserAsyncAction',
-  async (_, { getState, dispatch }) => {
+  async (_, { dispatch }) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchCurrentUserApi();
@@ -49,7 +49,7 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
   'currentUser/updateCurrentUserAsyncAction',
   async (
     { name, avatar, onSuccess }: IUpdateCurrentUserAsyncAction,
-    { getState, dispatch }
+    { dispatch }
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));

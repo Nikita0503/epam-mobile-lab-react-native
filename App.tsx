@@ -1,4 +1,4 @@
-import Test from '@components/Test';
+import AppNavigation from '@components/AppNavigation';
 import store, { persistor } from '@store';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -11,7 +11,7 @@ const App = () => {
     <GestureHandlerRootView style={styles.container}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Test />
+          <AppNavigation />
         </PersistGate>
       </Provider>
     </GestureHandlerRootView>
