@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from '@screens/SignInScreen';
 import SignUpScreen from '@screens/SignUpScreen';
+import TaskCreatorScreen from '@screens/TaskCreatorScreen';
 import TaskDetailsScreen from '@screens/TaskDetailsScreen';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
@@ -38,6 +39,7 @@ const AppNavigation = () => {
           <AppStack.Navigator screenOptions={{headerShown: false}}>
             <AppStack.Screen name={ERouteNames.TABS_SCREEN} component={Tabs} />
             <AppStack.Screen name={ERouteNames.TASK_DETAILS} component={TaskDetailsScreen} options={{headerShown: true}} />
+            <AppStack.Screen name={ERouteNames.TASK_CREATOR} component={TaskCreatorScreen} options={{headerShown: true}} />
           </AppStack.Navigator>
         )}
       </NavigationContainer>

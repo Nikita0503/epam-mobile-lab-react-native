@@ -8,9 +8,8 @@ export type AuthStackParamList = {
 
 export type AppStackParamList = {
   [ERouteNames.TABS_SCREEN]: NavigatorScreenParams<TabsStackParamList>;
-  [ERouteNames.ADD_TASK_SCREEN]: undefined;
-  [ERouteNames.EDIT_TASK_SCREEN]: {taskId: number};
   [ERouteNames.TASK_DETAILS]: {taskId: number};
+  [ERouteNames.TASK_CREATOR]: undefined;
 };
 
 export type TabsStackParamList = {

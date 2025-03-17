@@ -6,7 +6,6 @@ export enum ERouteNames {
   TABS_SCREEN = 'TabsScreen',
   TASKS_SCREEN = 'Tasks',
   //Other
-  ADD_TASK_SCREEN = 'AddTaskScreen',
-  EDIT_TASK_SCREEN = 'EditTaskScreen',
   TASK_DETAILS = 'TaskDetailsScreen',
+  TASK_CREATOR = 'TaskCreatorScreen',
 }

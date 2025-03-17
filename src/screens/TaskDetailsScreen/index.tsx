@@ -2,7 +2,7 @@ import useTask from '@hooks/useTask';
 import { ITask } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
@@ -10,11 +10,6 @@ import styles from './styles';
 interface IProps {
   task: ITask;
 }
-
-interface IWrapperProps {
-  route: RouteProp<AppStackParamList, ERouteNames.EDIT_TASK_SCREEN>;
-}
-
 const TaskDetailsScreen = ({task}: IProps) => {
 
   return (
@@ -24,9 +19,9 @@ const TaskDetailsScreen = ({task}: IProps) => {
   );
 };
 
-const TaskDetailsScreenWrapper = ({route}: IWrapperProps) => {
+const TaskDetailsScreenWrapper = () => {
 
-  const taskId = route.params.taskId;
+  const {params: {taskId}} = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
   const {task, error, loading} = useTask(taskId);
 
   if(loading){
