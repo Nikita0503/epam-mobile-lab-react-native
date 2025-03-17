@@ -13,7 +13,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
 import styles from './styles';
 
 interface IProps {
@@ -22,7 +21,7 @@ interface IProps {
 
 const CurrentUserScreen = ({ currentUser }: IProps) => {
   const { logout } = useAuth();
-  const { fetchCurrentUser, updateCurrentUser, loading } = useCurrentUser();
+  const { updateCurrentUser } = useCurrentUser();
 
   const [name, setName] = React.useState<string>(currentUser.name);
 
@@ -40,9 +39,6 @@ const CurrentUserScreen = ({ currentUser }: IProps) => {
       style={styles.container}>
       <Header title="Profile" hideBackButton={true} />
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={fetchCurrentUser} />
-        }
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
         <View>
