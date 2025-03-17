@@ -10,19 +10,16 @@ import {
 } from '../../interfaces/actions/authActions';
 
 export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
-  'auth/setAccessTokenAction'
+  'auth/setAccessTokenAction',
 );
 
 export const setLoadingAction = createAction<ISetLoadingAction>(
-  'auth/setLoadingAction'
+  'auth/setLoadingAction',
 );
 
 export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
   'auth/signInAsyncAction',
-  async (
-    { email, password, onSuccess }: ISignInAsyncAction,
-    { dispatch }
-  ) => {
+  async ({ email, password, onSuccess }: ISignInAsyncAction, { dispatch }) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await signInApi(email.toLowerCase(), password);
@@ -39,7 +36,7 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );
 
 export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
@@ -53,7 +50,7 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
       avatar,
       onSuccess,
     }: ISignUpAsyncAction,
-    { dispatch }
+    { dispatch },
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
@@ -75,5 +72,5 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );

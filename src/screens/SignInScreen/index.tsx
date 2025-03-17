@@ -12,13 +12,13 @@ const LoginScreen = () => {
   const [email, setEmail] = React.useState<string>('example@gmail.com');
   const [password, setPassword] = React.useState<string>('Password12345');
 
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
 
-  const navigation =  useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
 
   const onLoginPress = React.useCallback(() => {
     signIn(email, password);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password]);
 
   const goToSignUp = React.useCallback(() => {
@@ -26,19 +26,28 @@ const LoginScreen = () => {
       index: 0,
       routes: [{ name: ERouteNames.SIGN_UP_SCREEN }],
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={email} onChangeText={setEmail} placeholder="Email" />
+        <CustomTextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+        />
       </View>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={password} onChangeText={setPassword} placeholder="Password" secureTextEntry={true} />
+        <CustomTextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry={true}
+        />
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton onPress={onLoginPress} title="Login"/>
+        <CustomButton onPress={onLoginPress} title="Login" />
       </View>
       <View style={styles.buttonContainer}>
         <CustomButton onPress={goToSignUp} title="Go To Sign Up" />

@@ -6,31 +6,37 @@ import React from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 
-
 const TaskCreatorScreen = () => {
-
   const [title, setTitle] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
 
-  const {createTask} = useTasks();
+  const { createTask } = useTasks();
 
   const navigation = useNavigation();
 
   const onCreateTaskPress = React.useCallback(() => {
     createTask(title, description, [], () => navigation.goBack());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, description]);
 
   return (
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={title} onChangeText={setTitle} placeholder="Title" />
+        <CustomTextInput
+          value={title}
+          onChangeText={setTitle}
+          placeholder="Title"
+        />
       </View>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={description} onChangeText={setDescription} placeholder="Description" />
+        <CustomTextInput
+          value={description}
+          onChangeText={setDescription}
+          placeholder="Description"
+        />
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton onPress={onCreateTaskPress} title="Create Task"/>
+        <CustomButton onPress={onCreateTaskPress} title="Create Task" />
       </View>
     </View>
   );

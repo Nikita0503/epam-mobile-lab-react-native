@@ -12,7 +12,7 @@ export const signUpApi = async (
   email: string,
   name: string,
   password: string,
-  avatar?: File
+  avatar?: File,
 ) => {
   const formData = new FormData();
   formData.append('email', email);

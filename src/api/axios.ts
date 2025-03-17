@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
   },
   (error: AxiosError) => {
     Promise.reject(error);
-  }
+  },
 );
 
 axiosInstance.interceptors.response.use(
@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
       store.dispatch(setAccessTokenAction({ accessToken: undefined }));
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;

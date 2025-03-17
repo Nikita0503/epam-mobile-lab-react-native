@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 
 const Test = () => {
   return (
-    <View style={{marginTop: 120, marginLeft: 20}}>
+    <View style={{ marginTop: 120, marginLeft: 20 }}>
       <Text>Test</Text>
     </View>
   );

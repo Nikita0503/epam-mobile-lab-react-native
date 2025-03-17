@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, {Rect} from 'react-native-svg';
+import Svg, { Rect } from 'react-native-svg';
 
 const TaskActiveSvgImage = (props: any) => (
   <Svg

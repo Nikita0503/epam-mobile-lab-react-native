@@ -7,8 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 4,
   },
-  title: {
-  },
+  title: {},
 });
 
 export default styles;

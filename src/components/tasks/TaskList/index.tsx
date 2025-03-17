@@ -5,23 +5,23 @@ import TaskListItem from './TaskListItem';
 import TaskListSeparator from './TaskListSeparator';
 
 interface IProps {
-    tasks: ITask[];
-    error: any;
-    loading: boolean;
-    fetchTasks: () => void
+  tasks: ITask[];
+  error: any;
+  loading: boolean;
+  fetchTasks: () => void;
 }
 
-const TaskList = ({tasks, error, loading, fetchTasks}: IProps) => {
-
+const TaskList = ({ tasks, error, loading, fetchTasks }: IProps) => {
   return (
     <FlatList
-        refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={fetchTasks} />
-        }
-        data={tasks}
-        ItemSeparatorComponent={TaskListSeparator}
-        keyExtractor={(item: ITask) => item.id.toString()}
-        renderItem={({item}) => <TaskListItem task={item}/>}/>
+      refreshControl={
+        <RefreshControl refreshing={loading} onRefresh={fetchTasks} />
+      }
+      data={tasks}
+      ItemSeparatorComponent={TaskListSeparator}
+      keyExtractor={(item: ITask) => item.id.toString()}
+      renderItem={({ item }) => <TaskListItem task={item} />}
+    />
   );
 };
 

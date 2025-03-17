@@ -13,20 +13,20 @@ const useTasks = () => {
   const dispatch = useDispatch<TAppDispatch>();
 
   const tasks = useSelector<TRootState, ITask[]>(
-    (state: TRootState) => state.tasks.tasks
+    (state: TRootState) => state.tasks.tasks,
   );
 
   const error = useSelector<TRootState, any>(
-    (state: TRootState) => state.tasks.error
+    (state: TRootState) => state.tasks.error,
   );
 
   const loading = useSelector<TRootState, boolean>(
-    (state: TRootState) => state.tasks.loading
+    (state: TRootState) => state.tasks.loading,
   );
 
   const fetchTasks = React.useCallback(() => {
     dispatch(fetchTasksAsyncAction());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createTask = React.useCallback(
@@ -34,7 +34,7 @@ const useTasks = () => {
       title: string,
       description: string,
       files: File[],
-      onSuccess?: () => void
+      onSuccess?: () => void,
     ) => {
       dispatch(
         createTaskAsyncAction({
@@ -42,11 +42,11 @@ const useTasks = () => {
           description: description,
           files: files,
           onSuccess: onSuccess,
-        })
+        }),
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   const updateTask = React.useCallback(
@@ -56,7 +56,7 @@ const useTasks = () => {
       description: string,
       files: File[],
       oldFiles: IFile[],
-      onSuccess?: () => void
+      onSuccess?: () => void,
     ) => {
       dispatch(
         updateTaskAsyncAction({
@@ -66,11 +66,11 @@ const useTasks = () => {
           files: files,
           oldFiles: oldFiles,
           onSuccess: onSuccess,
-        })
+        }),
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   const deleteTask = React.useCallback(
@@ -79,11 +79,11 @@ const useTasks = () => {
         deleteTaskAsyncAction({
           taskId: taskId,
           onSuccess: onSuccess,
-        })
+        }),
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   return {

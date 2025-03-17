@@ -14,7 +14,7 @@ const initialState: ICurrentUserReducerState = {
 
 const currentUserReducer = createReducer<ICurrentUserReducerState>(
   initialState,
-  (builder) =>
+  builder =>
     builder
       .addCase(setCurrentUserAction, (store, { payload: { currentUser } }) => ({
         ...store,
@@ -27,7 +27,7 @@ const currentUserReducer = createReducer<ICurrentUserReducerState>(
       .addCase(setLoadingAction, (store, { payload: { loading } }) => ({
         ...store,
         loading: loading,
-      }))
+      })),
 );
 
 export default currentUserReducer;

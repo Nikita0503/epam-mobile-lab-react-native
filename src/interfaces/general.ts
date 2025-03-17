@@ -15,11 +15,9 @@ export interface IUser {
   avatar?: string;
 }
 
-
 export interface ITask {
   id: number;
   title: string;
   description: string;
   files: IFile[];
 }
-

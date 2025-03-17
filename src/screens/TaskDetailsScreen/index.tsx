@@ -10,8 +10,7 @@ import styles from './styles';
 interface IProps {
   task: ITask;
 }
-const TaskDetailsScreen = ({task}: IProps) => {
-
+const TaskDetailsScreen = ({ task }: IProps) => {
   return (
     <View style={styles.container}>
       <Text>{task?.title}</Text>
@@ -20,12 +19,13 @@ const TaskDetailsScreen = ({task}: IProps) => {
 };
 
 const TaskDetailsScreenWrapper = () => {
+  const {
+    params: { taskId },
+  } = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
+  const { task, error, loading } = useTask(taskId);
 
-  const {params: {taskId}} = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
-  const {task, error, loading} = useTask(taskId);
-
-  if(loading){
-    return <View/>;
+  if (loading) {
+    return <View />;
   }
 
   return <TaskDetailsScreen task={task!} />;

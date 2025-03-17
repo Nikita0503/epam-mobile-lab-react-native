@@ -19,13 +19,13 @@ const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const AppStack = createNativeStackNavigator<AppStackParamList>();
 
 const AppNavigation = () => {
-  const {accessToken} = useAuth();
+  const { accessToken } = useAuth();
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <NavigationContainer>
         {!accessToken ? (
-          <AuthStack.Navigator screenOptions={{headerShown: false}}>
+          <AuthStack.Navigator screenOptions={{ headerShown: false }}>
             <AuthStack.Screen
               name={ERouteNames.SIGN_IN_SCREEN}
               component={SignInScreen}
@@ -36,10 +36,18 @@ const AppNavigation = () => {
             />
           </AuthStack.Navigator>
         ) : (
-          <AppStack.Navigator screenOptions={{headerShown: false}}>
+          <AppStack.Navigator screenOptions={{ headerShown: false }}>
             <AppStack.Screen name={ERouteNames.TABS_SCREEN} component={Tabs} />
-            <AppStack.Screen name={ERouteNames.TASK_DETAILS} component={TaskDetailsScreen} options={{headerShown: true}} />
-            <AppStack.Screen name={ERouteNames.TASK_CREATOR} component={TaskCreatorScreen} options={{headerShown: true}} />
+            <AppStack.Screen
+              name={ERouteNames.TASK_DETAILS}
+              component={TaskDetailsScreen}
+              options={{ headerShown: true }}
+            />
+            <AppStack.Screen
+              name={ERouteNames.TASK_CREATOR}
+              component={TaskCreatorScreen}
+              options={{ headerShown: true }}
+            />
           </AppStack.Navigator>
         )}
       </NavigationContainer>

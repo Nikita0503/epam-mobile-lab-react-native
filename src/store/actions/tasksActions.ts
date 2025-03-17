@@ -23,25 +23,25 @@ import { TRootState } from '@store';
 import { handleErrorResponse } from '@utils/errorHandlers';
 
 export const setTasksAction = createAction<ISetTasksAction>(
-  'tasks/setTasksAction'
+  'tasks/setTasksAction',
 );
 
 export const addTaskAction = createAction<IAddTaskAction>(
-  'tasks/addTaskAction'
+  'tasks/addTaskAction',
 );
 
 export const updateTaskAction = createAction<IUpdateTaskAction>(
-  'tasks/updateTaskAction'
+  'tasks/updateTaskAction',
 );
 
 export const removeTaskAction = createAction<IRemoveTaskAction>(
-  'tasks/removeTaskAction'
+  'tasks/removeTaskAction',
 );
 
 export const setErrorAction = createAction<ISetError>('tasks/setErrorAction');
 
 export const setLoadingAction = createAction<ISetLoadingAction>(
-  'tasks/setLoadingAction'
+  'tasks/setLoadingAction',
 );
 
 export const fetchTasksAsyncAction = createAsyncThunk(
@@ -59,7 +59,7 @@ export const fetchTasksAsyncAction = createAsyncThunk(
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );
 
 export const createTaskAsyncAction = createAsyncThunk<
@@ -68,21 +68,12 @@ export const createTaskAsyncAction = createAsyncThunk<
 >(
   'tasks/createTaskAsyncAction',
   async (
-    {
-      title,
-      description,
-      files,
-      onSuccess,
-    }: ICreateTaskAsyncAction,
-    { dispatch }
+    { title, description, files, onSuccess }: ICreateTaskAsyncAction,
+    { dispatch },
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
-      const res = await createTaskApi(
-        title,
-        description,
-        files
-      );
+      const res = await createTaskApi(title, description, files);
       console.log('Created Task: ', res);
       dispatch(fetchTasksAsyncAction());
       if (onSuccess) {
@@ -94,7 +85,7 @@ export const createTaskAsyncAction = createAsyncThunk<
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );
 
 export const updateTaskAsyncAction = createAsyncThunk<
@@ -111,7 +102,7 @@ export const updateTaskAsyncAction = createAsyncThunk<
       oldFiles,
       onSuccess,
     }: IUpdateTaskAsyncAction,
-    { getState, dispatch }
+    { getState, dispatch },
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
@@ -119,18 +110,13 @@ export const updateTaskAsyncAction = createAsyncThunk<
       const taskInfo: ITask | undefined = taskInfoSelector(taskId)(state);
       if (taskInfo) {
         const deletedFiles = taskInfo.files.filter(
-          (file) => !oldFiles.some((oldFile) => oldFile.name === file.name)
+          file => !oldFiles.some(oldFile => oldFile.name === file.name),
         );
         for (let i = 0; i < deletedFiles.length; i++) {
           await deleteFileApi(deletedFiles[i].id);
         }
       }
-      const res = await updateTaskApi(
-        taskId,
-        title,
-        description,
-        files
-      );
+      const res = await updateTaskApi(taskId, title, description, files);
       console.log('Updated Task: ', res);
       dispatch(fetchTasksAsyncAction());
       if (onSuccess) {
@@ -142,7 +128,7 @@ export const updateTaskAsyncAction = createAsyncThunk<
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );
 
 export const deleteTaskAsyncAction = createAsyncThunk<
@@ -150,10 +136,7 @@ export const deleteTaskAsyncAction = createAsyncThunk<
   IDeleteTaskAsyncAction
 >(
   'tasks/deleteTaskAsyncAction',
-  async (
-    { taskId, onSuccess }: IDeleteTaskAsyncAction,
-    { dispatch }
-  ) => {
+  async ({ taskId, onSuccess }: IDeleteTaskAsyncAction, { dispatch }) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await deleteTaskApi(taskId);
@@ -167,5 +150,5 @@ export const deleteTaskAsyncAction = createAsyncThunk<
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );

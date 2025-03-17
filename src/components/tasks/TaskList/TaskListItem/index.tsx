@@ -10,13 +10,12 @@ interface IProps {
   task: ITask;
 }
 
-const TaskListItem = ({task}: IProps) => {
-
+const TaskListItem = ({ task }: IProps) => {
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   const goToTaskDetails = React.useCallback(() => {
-    navigation.navigate(ERouteNames.TASK_DETAILS, {taskId: task.id});
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    navigation.navigate(ERouteNames.TASK_DETAILS, { taskId: task.id });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [task]);
 
   return (

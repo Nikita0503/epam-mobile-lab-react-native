@@ -10,13 +10,13 @@ const TabsStack = createBottomTabNavigator<TabsStackParamList>();
 
 const Tabs = () => {
   return (
-    <TabsStack.Navigator screenOptions={{headerShown: false}}>
+    <TabsStack.Navigator screenOptions={{ headerShown: false }}>
       <TabsStack.Screen
         name={ERouteNames.TASKS_SCREEN}
         component={TasksScreen}
         options={{
           tabBarLabel: 'Tasks',
-          tabBarIcon: ({focused}) =>
+          tabBarIcon: ({ focused }) =>
             focused ? <TasksScreenTabActive /> : <TasksScreenTabInactive />,
         }}
       />

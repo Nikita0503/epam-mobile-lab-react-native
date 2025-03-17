@@ -7,7 +7,7 @@ const initialState: IAuthReducerState = {
   loading: false,
 };
 
-const authReducer = createReducer<IAuthReducerState>(initialState, (builder) =>
+const authReducer = createReducer<IAuthReducerState>(initialState, builder =>
   builder
     .addCase(setAccessTokenAction, (store, { payload: { accessToken } }) => ({
       ...store,
@@ -16,7 +16,7 @@ const authReducer = createReducer<IAuthReducerState>(initialState, (builder) =>
     .addCase(setLoadingAction, (store, { payload: { loading } }) => ({
       ...store,
       loading: loading,
-    }))
+    })),
 );
 
 export default authReducer;

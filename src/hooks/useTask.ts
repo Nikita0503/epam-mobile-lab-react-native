@@ -23,7 +23,7 @@ const useTask = (taskId: number) => {
 
   React.useEffect(() => {
     fetchTaskData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskId]);
 
   return { task, error, loading };

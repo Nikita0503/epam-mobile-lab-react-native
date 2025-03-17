@@ -13,7 +13,7 @@ export const fetchTasksApi = async () => {
 export const createTaskApi = async (
   title: string,
   description: string,
-  files?: File[]
+  files?: File[],
 ) => {
   const formData = new FormData();
   formData.append('title', title);
@@ -23,10 +23,7 @@ export const createTaskApi = async (
       formData.append('file', files[i]);
     }
   }
-  const res = await axiosInstance.post(
-    '/tasks',
-    formData
-  );
+  const res = await axiosInstance.post('/tasks', formData);
   return res.data;
 };
 
@@ -34,7 +31,7 @@ export const updateTaskApi = async (
   taskId: number,
   title: string,
   description: string,
-  files?: File[]
+  files?: File[],
 ) => {
   const formData = new FormData();
   formData.append('title', title);
@@ -44,16 +41,11 @@ export const updateTaskApi = async (
       formData.append('file', files[i]);
     }
   }
-  const res = await axiosInstance.put(
-    `/tasks/${taskId}`,
-    formData
-  );
+  const res = await axiosInstance.put(`/tasks/${taskId}`, formData);
   return res.data;
 };
 
 export const deleteTaskApi = async (taskId: number) => {
-  const res = await axiosInstance.delete(
-    `/tasks/${taskId}`
-  );
+  const res = await axiosInstance.delete(`/tasks/${taskId}`);
   return res.data;
 };

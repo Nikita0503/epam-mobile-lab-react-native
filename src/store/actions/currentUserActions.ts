@@ -13,15 +13,15 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { handleErrorResponse } from '@utils/errorHandlers';
 
 export const setCurrentUserAction = createAction<ISetCurrentUserAction>(
-  'currentUser/setCurrentUserAction'
+  'currentUser/setCurrentUserAction',
 );
 
 export const setErrorAction = createAction<ISetError>(
-  'currentUser/setErrorAction'
+  'currentUser/setErrorAction',
 );
 
 export const setLoadingAction = createAction<ISetLoadingAction>(
-  'currentUser/setLoadingAction'
+  'currentUser/setLoadingAction',
 );
 
 export const fetchCurrentUserAsyncAction = createAsyncThunk(
@@ -39,7 +39,7 @@ export const fetchCurrentUserAsyncAction = createAsyncThunk(
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );
 
 export const updateCurrentUserAsyncAction = createAsyncThunk<
@@ -49,7 +49,7 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
   'currentUser/updateCurrentUserAsyncAction',
   async (
     { name, avatar, onSuccess }: IUpdateCurrentUserAsyncAction,
-    { dispatch }
+    { dispatch },
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
@@ -68,5 +68,5 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
     } finally {
       dispatch(setLoadingAction({ loading: false }));
     }
-  }
+  },
 );

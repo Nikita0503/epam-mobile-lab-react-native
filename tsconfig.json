@@ -15,7 +15,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@store": ["src/store"],
-      "@selectors/*": ["src/store/selectors/*"],
+      "@selectors/*": ["src/store/selectors/*"]
     }
   }
 }

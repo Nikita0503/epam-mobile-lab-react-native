@@ -16,38 +16,36 @@ const initialState: ITasksReducerState = {
   loading: false,
 };
 
-const tasksReducer = createReducer<ITasksReducerState>(
-  initialState,
-  (builder) =>
-    builder
-      .addCase(setTasksAction, (store, { payload: { tasks } }) => ({
-        ...store,
-        tasks: tasks,
-      }))
-      .addCase(addTaskAction, (store, { payload: { task } }) => ({
-        ...store,
-        tasks: [...store.tasks, task],
-      }))
-      .addCase(updateTaskAction, (store, { payload: { task } }) => ({
-        ...store,
-        tasks: store.tasks.map((currentTask: ITask) =>
-          currentTask.id === task.id ? task : currentTask
-        ),
-      }))
-      .addCase(removeTaskAction, (store, { payload: { task } }) => ({
-        ...store,
-        tasks: store.tasks.filter(
-          (currentTask: ITask) => currentTask.id !== task.id
-        ),
-      }))
-      .addCase(setErrorAction, (store, { payload: { error } }) => ({
-        ...store,
-        error: error,
-      }))
-      .addCase(setLoadingAction, (store, { payload: { loading } }) => ({
-        ...store,
-        loading: loading,
-      }))
+const tasksReducer = createReducer<ITasksReducerState>(initialState, builder =>
+  builder
+    .addCase(setTasksAction, (store, { payload: { tasks } }) => ({
+      ...store,
+      tasks: tasks,
+    }))
+    .addCase(addTaskAction, (store, { payload: { task } }) => ({
+      ...store,
+      tasks: [...store.tasks, task],
+    }))
+    .addCase(updateTaskAction, (store, { payload: { task } }) => ({
+      ...store,
+      tasks: store.tasks.map((currentTask: ITask) =>
+        currentTask.id === task.id ? task : currentTask,
+      ),
+    }))
+    .addCase(removeTaskAction, (store, { payload: { task } }) => ({
+      ...store,
+      tasks: store.tasks.filter(
+        (currentTask: ITask) => currentTask.id !== task.id,
+      ),
+    }))
+    .addCase(setErrorAction, (store, { payload: { error } }) => ({
+      ...store,
+      error: error,
+    }))
+    .addCase(setLoadingAction, (store, { payload: { loading } }) => ({
+      ...store,
+      loading: loading,
+    })),
 );
 
 export default tasksReducer;

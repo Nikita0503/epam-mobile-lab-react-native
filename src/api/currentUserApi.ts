@@ -7,7 +7,7 @@ export const fetchCurrentUserApi = async () => {
 
 export const updateCurrentUserApi = async (
   name: string,
-  avatar?: File | string | undefined
+  avatar?: File | string | undefined,
 ) => {
   const formData = new FormData();
   formData.append('name', name);

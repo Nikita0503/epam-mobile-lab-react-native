@@ -15,13 +15,13 @@ const SignUpScreen = () => {
   const [repeatPassword, setRepeatPassword] = React.useState<string>('');
   const [avatar, setAvatar] = React.useState<File | undefined>(undefined);
 
-  const {signUp} = useAuth();
+  const { signUp } = useAuth();
 
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
 
   const onSignUpPress = React.useCallback(() => {
     signUp(email, name, password, repeatPassword, avatar);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, name, password, repeatPassword, avatar]);
 
   const goToSignIn = React.useCallback(() => {
@@ -29,22 +29,40 @@ const SignUpScreen = () => {
       index: 0,
       routes: [{ name: ERouteNames.SIGN_IN_SCREEN }],
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={email} onChangeText={setEmail} placeholder="Email" />
+        <CustomTextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+        />
       </View>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={name} onChangeText={setName} placeholder="Name" />
+        <CustomTextInput
+          value={name}
+          onChangeText={setName}
+          placeholder="Name"
+        />
       </View>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={password} onChangeText={setPassword} placeholder="Password" secureTextEntry={true} />
+        <CustomTextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry={true}
+        />
       </View>
       <View style={styles.textInputContainer}>
-        <CustomTextInput value={repeatPassword} onChangeText={setRepeatPassword} placeholder="Repeat Password" secureTextEntry={true} />
+        <CustomTextInput
+          value={repeatPassword}
+          onChangeText={setRepeatPassword}
+          placeholder="Repeat Password"
+          secureTextEntry={true}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <CustomButton onPress={onSignUpPress} title="Sign Up" />
