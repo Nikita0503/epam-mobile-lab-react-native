@@ -42,17 +42,14 @@ const AppNavigation = () => {
             <AppStack.Screen
               name={ERouteNames.TASK_DETAILS}
               component={TaskDetailsScreen}
-              options={{ headerShown: true }}
             />
             <AppStack.Screen
               name={ERouteNames.TASK_CREATOR}
               component={TaskCreatorScreen}
-              options={{ headerShown: false }}
             />
             <AppStack.Screen
               name={ERouteNames.TASK_EDITOR}
               component={TaskEditorScreen}
-              options={{ headerShown: false }}
             />
           </AppStack.Navigator>
         )}
