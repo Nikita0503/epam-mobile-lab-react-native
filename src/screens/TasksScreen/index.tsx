@@ -12,6 +12,8 @@ const TasksScreen = () => {
     fetchTasks();
   }, []);
 
+  console.log({ tasks });
+
   return (
     <View style={styles.container}>
       <TaskListHeader taskCount={tasks.length} />

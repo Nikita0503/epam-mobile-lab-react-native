@@ -24,11 +24,18 @@ const useCurrentUser = () => {
   }, []);
 
   const updateCurrentUser = React.useCallback(
-    async (name: string, avatar?: File | string | undefined) => {
+    async (
+      name: string,
+      avatar: File | string | undefined,
+      onSuccess: () => void,
+    ) => {
       setLoading(true);
       try {
         await updateCurrentUserApi(name, avatar);
         fetchCurrentUser();
+        if (onSuccess) {
+          onSuccess();
+        }
       } catch (e) {
         setError(e);
       } finally {

@@ -1,10 +1,19 @@
-import CustomButton from '@components/UI/CustomButton';
-import CustomTextInput from '@components/UI/CustomTextInput';
+import Header from '@components/headers/Header';
+import TextInputWithHint from '@components/TextInputWithHint';
 import useAuth from '@hooks/useAuth';
 import useCurrentUser from '@hooks/useCurrentUser';
 import { IUser } from '@interfaces/general';
 import React from 'react';
-import { View } from 'react-native';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { RefreshControl } from 'react-native-gesture-handler';
 import styles from './styles';
 
 interface IProps {
@@ -13,28 +22,55 @@ interface IProps {
 
 const CurrentUserScreen = ({ currentUser }: IProps) => {
   const { logout } = useAuth();
-  const { updateCurrentUser } = useCurrentUser();
+  const { fetchCurrentUser, updateCurrentUser, loading } = useCurrentUser();
 
   const [name, setName] = React.useState<string>(currentUser.name);
 
+  const showCongratulations = React.useCallback(() => {
+    Alert.alert('Congratulations!', 'Profile updated successfully');
+  }, []);
+
   const onUpdateCurrentUserPress = React.useCallback(() => {
-    updateCurrentUser(name);
+    updateCurrentUser(name, undefined, showCongratulations);
   }, [name]);
 
   return (
-    <View style={styles.container}>
-      <CustomTextInput value={name} onChangeText={setName} />
-      <CustomTextInput value={currentUser.email} editable={false} />
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          onPress={onUpdateCurrentUserPress}
-          title="Update Profile"
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton onPress={logout} title="Logout" />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <Header title="Profile" hideBackButton={true} />
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={fetchCurrentUser} />
+        }
+        contentContainerStyle={styles.scrollViewContainer}
+        showsVerticalScrollIndicator={false}>
+        <View>
+          <View style={styles.textInputContainer}>
+            <TextInputWithHint
+              hint="Name"
+              value={name}
+              onChangeText={setName}
+            />
+          </View>
+          <View style={styles.textInputContainer}>
+            <TextInputWithHint
+              hint="Email"
+              value={currentUser.email}
+              editable={false}
+            />
+          </View>
+        </View>
+        <View>
+          <Pressable style={styles.button} onPress={onUpdateCurrentUserPress}>
+            <Text style={styles.buttonText}>Update</Text>
+          </Pressable>
+          <Pressable style={styles.button} onPress={logout}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

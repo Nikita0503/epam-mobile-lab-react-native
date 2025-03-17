@@ -16,6 +16,7 @@ const TaskList = ({ tasks, error, loading, fetchTasks }: IProps) => {
   return (
     <FlatList
       style={styles.container}
+      contentContainerStyle={styles.contentContainerStyle}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={fetchTasks} />
       }
