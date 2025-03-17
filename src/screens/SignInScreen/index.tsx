@@ -1,11 +1,19 @@
-import CustomButton from '@components/UI/CustomButton';
-import CustomTextInput from '@components/UI/CustomTextInput';
 import useAuth from '@hooks/useAuth';
+import AppLogoSvgImage from '@images/AppLogoSvgImage';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AuthStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { Colors } from '@theme/colors';
 import React from 'react';
-import { View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import styles from './styles';
 
 const LoginScreen = () => {
@@ -28,29 +36,45 @@ const LoginScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textInputContainer}>
-        <CustomTextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Email"
-        />
-      </View>
-      <View style={styles.textInputContainer}>
-        <CustomTextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="Password"
-          secureTextEntry={true}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton onPress={onLoginPress} title="Login" />
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton onPress={goToSignUp} title="Go To Sign Up" />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContainer}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.appLogoContainer}>
+          <AppLogoSvgImage />
+          <Text style={styles.appLogoText}>Welcome!</Text>
+        </View>
+        <View style={styles.textInputsContainer}>
+          <View style={styles.textInputContainer}>
+            <Text style={styles.textInputTitle}>Login</Text>
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
+              cursorColor={Colors.white}
+              style={styles.textInput}
+            />
+          </View>
+          <View style={styles.textInputContainer}>
+            <Text style={styles.textInputTitle}>Password</Text>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              cursorColor={Colors.white}
+              secureTextEntry={true}
+              style={styles.textInput}
+            />
+          </View>
+        </View>
+        <Pressable style={styles.button} onPress={onLoginPress}>
+          <Text style={styles.buttonText}>Log In</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={goToSignUp}>
+          <Text style={styles.buttonText}>Go to Sign Up</Text>
+        </Pressable>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
