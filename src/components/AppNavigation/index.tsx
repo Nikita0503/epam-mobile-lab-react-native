@@ -6,7 +6,8 @@ import {
 } from '@interfaces/navigation/routeParams';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '@screens/LoginScreen';
+import SignInScreen from '@screens/SignInScreen';
+import SignUpScreen from '@screens/SignUpScreen';
 import TestScreen from '@screens/TestScreen';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
@@ -24,8 +25,12 @@ const AppNavigation = () => {
         {!accessToken ? (
           <AuthStack.Navigator screenOptions={{headerShown: false}}>
             <AuthStack.Screen
-              name={ERouteNames.LOGIN_SCREEN}
-              component={LoginScreen}
+              name={ERouteNames.SIGN_IN_SCREEN}
+              component={SignInScreen}
+            />
+            <AuthStack.Screen
+              name={ERouteNames.SIGN_UP_SCREEN}
+              component={SignUpScreen}
             />
           </AuthStack.Navigator>
         ) : (

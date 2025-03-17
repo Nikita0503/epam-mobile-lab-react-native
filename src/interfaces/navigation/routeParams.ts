@@ -1,8 +1,9 @@
-import {NavigatorScreenParams} from '@react-navigation/native';
-import {ERouteNames} from './routeNames';
+import { NavigatorScreenParams } from '@react-navigation/native';
+import { ERouteNames } from './routeNames';
 
 export type AuthStackParamList = {
-  [ERouteNames.LOGIN_SCREEN]: undefined;
+  [ERouteNames.SIGN_IN_SCREEN]: undefined;
+  [ERouteNames.SIGN_UP_SCREEN]: undefined;
 };
 
 export type AppStackParamList = {

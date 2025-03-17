@@ -1,6 +1,7 @@
 export enum ERouteNames {
   //Auth
-  LOGIN_SCREEN = 'LoginScreen',
+  SIGN_IN_SCREEN = 'SignInScreen',
+  SIGN_UP_SCREEN = 'SignUpScreen',
   //Tabs
   TABS_SCREEN = 'TabsScreen',
   TASKS_SCREEN = 'TasksScreen',
