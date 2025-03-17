@@ -20,13 +20,13 @@ const TaskEditorScreen = ({ task }: IProps) => {
     task.description,
   );
 
-  const { createTask } = useTasks();
+  const { updateTask } = useTasks();
 
   const navigation = useNavigation();
 
-  const onCreateTaskPress = React.useCallback(() => {
-    createTask(title, description, [], () => navigation.goBack());
-  }, [title, description]);
+  const onUpdateTaskPress = React.useCallback(() => {
+    updateTask(task.id, title, description, [], [], () => navigation.goBack());
+  }, [task, title, description]);
 
   return (
     <View style={styles.container}>
@@ -45,7 +45,7 @@ const TaskEditorScreen = ({ task }: IProps) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton onPress={onCreateTaskPress} title="Create Task" />
+        <CustomButton onPress={onUpdateTaskPress} title="Update Task" />
       </View>
     </View>
   );
