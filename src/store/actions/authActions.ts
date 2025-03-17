@@ -25,7 +25,7 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
-      const res = await signInApi(email, password);
+      const res = await signInApi(email.toLowerCase(), password);
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
       }
@@ -61,7 +61,7 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
         Alert.alert('Passwords do not match');
         return;
       }
-      const res = await signUpApi(email, name, password, avatar);
+      const res = await signUpApi(email.toLowerCase(), name, password, avatar);
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
       }

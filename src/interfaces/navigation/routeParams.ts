@@ -9,12 +9,10 @@ export type AuthStackParamList = {
 export type AppStackParamList = {
   [ERouteNames.TABS_SCREEN]: NavigatorScreenParams<TabsStackParamList>;
   [ERouteNames.ADD_TASK_SCREEN]: undefined;
-  [ERouteNames.EDIT_TASK_SCREEN]: {taskId: string};
-  [ERouteNames.RANDOM_TASKS_SCREEN]: {taskNumber: number};
+  [ERouteNames.EDIT_TASK_SCREEN]: {taskId: number};
+  [ERouteNames.TASK_DETAILS]: {taskId: number};
 };
 
 export type TabsStackParamList = {
   [ERouteNames.TASKS_SCREEN]: undefined;
-  [ERouteNames.MAP_SCREEN]: undefined;
-  [ERouteNames.GENERATOR_SCREEN]: undefined;
 };

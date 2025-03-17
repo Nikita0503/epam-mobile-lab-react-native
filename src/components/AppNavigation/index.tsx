@@ -1,3 +1,4 @@
+import Tabs from '@components/Tabs';
 import useAuth from '@hooks/useAuth';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import {
@@ -8,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from '@screens/SignInScreen';
 import SignUpScreen from '@screens/SignUpScreen';
-import TestScreen from '@screens/TestScreen';
+import TaskDetailsScreen from '@screens/TaskDetailsScreen';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
@@ -35,10 +36,8 @@ const AppNavigation = () => {
           </AuthStack.Navigator>
         ) : (
           <AppStack.Navigator screenOptions={{headerShown: false}}>
-            <AppStack.Screen
-              name={ERouteNames.RANDOM_TASKS_SCREEN}
-              component={TestScreen}
-            />
+            <AppStack.Screen name={ERouteNames.TABS_SCREEN} component={Tabs} />
+            <AppStack.Screen name={ERouteNames.TASK_DETAILS} component={TaskDetailsScreen} options={{headerShown: true}} />
           </AppStack.Navigator>
         )}
       </NavigationContainer>

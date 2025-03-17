@@ -9,8 +9,8 @@ import { View } from 'react-native';
 import styles from './styles';
 
 const LoginScreen = () => {
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('example@gmail.com');
+  const [password, setPassword] = React.useState<string>('Password12345');
 
   const {signIn} = useAuth();
 

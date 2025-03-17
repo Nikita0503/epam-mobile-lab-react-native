@@ -4,11 +4,9 @@ export enum ERouteNames {
   SIGN_UP_SCREEN = 'SignUpScreen',
   //Tabs
   TABS_SCREEN = 'TabsScreen',
-  TASKS_SCREEN = 'TasksScreen',
-  MAP_SCREEN = 'MapScreen',
-  GENERATOR_SCREEN = 'GeneratorScreen',
+  TASKS_SCREEN = 'Tasks',
   //Other
   ADD_TASK_SCREEN = 'AddTaskScreen',
   EDIT_TASK_SCREEN = 'EditTaskScreen',
-  RANDOM_TASKS_SCREEN = 'RandomTasksScreen',
+  TASK_DETAILS = 'TaskDetailsScreen',
 }
