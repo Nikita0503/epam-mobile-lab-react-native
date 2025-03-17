@@ -1,9 +1,16 @@
-import CustomButton from '@components/UI/CustomButton';
-import CustomTextInput from '@components/UI/CustomTextInput';
+import Header from '@components/headers/Header';
+import TextInputWithHint from '@components/TextInputWithHint';
 import useTasks from '@hooks/useTasks';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './styles';
 
 const TaskCreatorScreen = () => {
@@ -14,30 +21,44 @@ const TaskCreatorScreen = () => {
 
   const navigation = useNavigation();
 
+  const goToTasks = React.useCallback(() => {
+    navigation.goBack();
+  }, []);
+
   const onCreateTaskPress = React.useCallback(() => {
-    createTask(title, description, [], () => navigation.goBack());
+    createTask(title, description, [], goToTasks);
   }, [title, description]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textInputContainer}>
-        <CustomTextInput
-          value={title}
-          onChangeText={setTitle}
-          placeholder="Title"
-        />
-      </View>
-      <View style={styles.textInputContainer}>
-        <CustomTextInput
-          value={description}
-          onChangeText={setDescription}
-          placeholder="Description"
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton onPress={onCreateTaskPress} title="Create Task" />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <Header title="Add new task" />
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContainer}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.taskAddPhotoContainer}>
+          {/* <TaskAddPhoto photo={taskPhoto} setPhoto={setTaskPhoto} /> */}
+        </View>
+        <View style={styles.content}>
+          <View style={styles.infoContainer}>
+            <TextInputWithHint
+              hint="Task title"
+              value={title}
+              onChangeText={setTitle}
+            />
+            <TextInputWithHint
+              hint="Task description"
+              value={description}
+              onChangeText={setDescription}
+            />
+          </View>
+          <Pressable style={styles.button} onPress={onCreateTaskPress}>
+            <Text style={styles.buttonText}>Save</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

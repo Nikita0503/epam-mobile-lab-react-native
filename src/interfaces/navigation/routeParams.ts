@@ -11,9 +11,10 @@ export type AppStackParamList = {
   [ERouteNames.TASK_DETAILS]: { taskId: number };
   [ERouteNames.TASK_CREATOR]: undefined;
   [ERouteNames.TASK_EDITOR]: { taskId: number };
-  [ERouteNames.CURRENT_USER]: undefined;
 };
 
 export type TabsStackParamList = {
   [ERouteNames.TASKS_SCREEN]: undefined;
+  [ERouteNames.CURRENT_USER]: undefined;
+  [ERouteNames.ALL_TASKS_SCREEN]: undefined;
 };

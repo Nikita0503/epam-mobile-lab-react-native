@@ -3,6 +3,7 @@ import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import TaskListItem from './TaskListItem';
 import TaskListSeparator from './TaskListSeparator';
+import styles from './styles';
 
 interface IProps {
   tasks: ITask[];
@@ -14,6 +15,7 @@ interface IProps {
 const TaskList = ({ tasks, error, loading, fetchTasks }: IProps) => {
   return (
     <FlatList
+      style={styles.container}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={fetchTasks} />
       }

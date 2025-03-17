@@ -1,11 +1,14 @@
-import CustomButton from '@components/UI/CustomButton';
 import useTasks from '@hooks/useTasks';
+import TaskActiveSvgImage from '@images/icons/TaskActiveSvgImage';
+import TaskCompletedSvgImage from '@images/icons/TaskCompletedSvgImage';
+import TaskDeleteSvgImage from '@images/icons/TaskDeleteSvgImage';
+import TaskEditSvgImage from '@images/icons/TaskEditSvgImage';
 import { ITask } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 interface IProps {
@@ -26,18 +29,40 @@ const TaskListItem = ({ task }: IProps) => {
   }, [task]);
 
   const onDeleteTaskPress = React.useCallback(() => {
-    deleteTask(task.id);
+    Alert.alert('Are you sure?', 'Do you wanna delete the task?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          deleteTask(task.id);
+        },
+      },
+    ]);
   }, [task]);
 
   return (
     <TouchableOpacity onPress={goToTaskDetails} style={styles.container}>
-      <Text style={styles.title}>{task.title}</Text>
-      <View style={styles.actionsContainer}>
-        <View style={styles.actionContainer}>
-          <CustomButton onPress={goToTaskEditor} title="Edit" />
-        </View>
-        <View style={styles.actionContainer}>
-          <CustomButton onPress={onDeleteTaskPress} title="Delete" />
+      <Pressable style={styles.taskStatusContainer} onPress={() => {}}>
+        {task.completed ? <TaskCompletedSvgImage /> : <TaskActiveSvgImage />}
+      </Pressable>
+      <View style={styles.content}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={[styles.titleText, task.completed && styles.titleTextThrough]}>
+          {task.title}
+        </Text>
+
+        <View style={styles.actionsContainer}>
+          <Pressable style={styles.actionContainer} onPress={onDeleteTaskPress}>
+            <TaskDeleteSvgImage />
+          </Pressable>
+          <Pressable style={styles.actionContainer} onPress={goToTaskEditor}>
+            <TaskEditSvgImage />
+          </Pressable>
         </View>
       </View>
     </TouchableOpacity>

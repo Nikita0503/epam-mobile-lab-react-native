@@ -7,7 +7,6 @@ import {
 } from '@interfaces/navigation/routeParams';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CurrentUserScreen from '@screens/CurrentUserScreen';
 import SignInScreen from '@screens/SignInScreen';
 import SignUpScreen from '@screens/SignUpScreen';
 import TaskCreatorScreen from '@screens/TaskCreatorScreen';
@@ -48,17 +47,12 @@ const AppNavigation = () => {
             <AppStack.Screen
               name={ERouteNames.TASK_CREATOR}
               component={TaskCreatorScreen}
-              options={{ headerShown: true }}
+              options={{ headerShown: false }}
             />
             <AppStack.Screen
               name={ERouteNames.TASK_EDITOR}
               component={TaskEditorScreen}
-              options={{ headerShown: true }}
-            />
-            <AppStack.Screen
-              name={ERouteNames.CURRENT_USER}
-              component={CurrentUserScreen}
-              options={{ headerShown: true }}
+              options={{ headerShown: false }}
             />
           </AppStack.Navigator>
         )}

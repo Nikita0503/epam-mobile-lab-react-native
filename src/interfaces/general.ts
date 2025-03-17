@@ -20,4 +20,5 @@ export interface ITask {
   title: string;
   description: string;
   files: IFile[];
+  completed: boolean;
 }
