@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: Colors.white,
   },
+  textInputContainer: {
+    marginBottom: 12,
+  },
   buttonContainer: {
     width: '50%',
     alignSelf: 'center',

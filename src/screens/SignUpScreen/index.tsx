@@ -21,7 +21,6 @@ const SignUpScreen = () => {
 
   const onSignUpPress = React.useCallback(() => {
     signUp(email, name, password, repeatPassword, avatar);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, name, password, repeatPassword, avatar]);
 
   const goToSignIn = React.useCallback(() => {
@@ -29,7 +28,6 @@ const SignUpScreen = () => {
       index: 0,
       routes: [{ name: ERouteNames.SIGN_IN_SCREEN }],
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

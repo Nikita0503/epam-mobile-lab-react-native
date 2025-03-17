@@ -1,7 +1,7 @@
 import axiosInstance from './axios';
 
 export const fetchCurrentUserApi = async () => {
-  const res = await axiosInstance.post('/users/me');
+  const res = await axiosInstance.get('/users/me');
   return res.data;
 };
 

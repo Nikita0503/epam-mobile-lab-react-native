@@ -13,6 +13,7 @@ const useTask = (taskId: number) => {
       const response = await fetchTaskApi(taskId);
       if (response.task) {
         setTask(response.task);
+        setError(undefined);
       }
     } catch (e) {
       setError(e);
@@ -23,7 +24,6 @@ const useTask = (taskId: number) => {
 
   React.useEffect(() => {
     fetchTaskData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskId]);
 
   return { task, error, loading };

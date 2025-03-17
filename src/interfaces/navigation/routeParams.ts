@@ -10,6 +10,8 @@ export type AppStackParamList = {
   [ERouteNames.TABS_SCREEN]: NavigatorScreenParams<TabsStackParamList>;
   [ERouteNames.TASK_DETAILS]: { taskId: number };
   [ERouteNames.TASK_CREATOR]: undefined;
+  [ERouteNames.TASK_EDITOR]: { taskId: number };
+  [ERouteNames.CURRENT_USER]: undefined;
 };
 
 export type TabsStackParamList = {

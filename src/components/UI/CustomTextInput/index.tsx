@@ -3,7 +3,7 @@ import { TextInput, TextInputProps, View, ViewStyle } from 'react-native';
 import styles from './styles';
 
 interface IProps extends TextInputProps {
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   value: string;
   textInputContainerStyle?: ViewStyle;
   textInputStyle?: ViewStyle;

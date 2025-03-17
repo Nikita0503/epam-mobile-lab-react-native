@@ -1,14 +1,24 @@
 import CustomButton from '@components/UI/CustomButton';
 import CustomTextInput from '@components/UI/CustomTextInput';
+import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
-import { useNavigation } from '@react-navigation/native';
+import { ITask } from '@interfaces/general';
+import { ERouteNames } from '@interfaces/navigation/routeNames';
+import { AppStackParamList } from '@interfaces/navigation/routeParams';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 
-const TaskCreatorScreen = () => {
-  const [title, setTitle] = React.useState<string>('');
-  const [description, setDescription] = React.useState<string>('');
+interface IProps {
+  task: ITask;
+}
+
+const TaskEditorScreen = ({ task }: IProps) => {
+  const [title, setTitle] = React.useState<string>(task.title);
+  const [description, setDescription] = React.useState<string>(
+    task.description,
+  );
 
   const { createTask } = useTasks();
 
@@ -41,4 +51,17 @@ const TaskCreatorScreen = () => {
   );
 };
 
-export default TaskCreatorScreen;
+const TaskEditorScreenWrapper = () => {
+  const {
+    params: { taskId },
+  } = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
+  const { task, error, loading } = useTask(taskId);
+
+  if (loading) {
+    return <View />;
+  }
+
+  return <TaskEditorScreen task={task!} />;
+};
+
+export default TaskEditorScreenWrapper;

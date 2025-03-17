@@ -8,4 +8,6 @@ export enum ERouteNames {
   //Other
   TASK_DETAILS = 'TaskDetailsScreen',
   TASK_CREATOR = 'TaskCreatorScreen',
+  TASK_EDITOR = 'TaskEditorScreen',
+  CURRENT_USER = 'CurrentUserScreen',
 }

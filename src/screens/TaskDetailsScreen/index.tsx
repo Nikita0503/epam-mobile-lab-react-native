@@ -10,6 +10,7 @@ import styles from './styles';
 interface IProps {
   task: ITask;
 }
+
 const TaskDetailsScreen = ({ task }: IProps) => {
   return (
     <View style={styles.container}>

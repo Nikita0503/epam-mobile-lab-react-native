@@ -20,7 +20,6 @@ const useAuth = () => {
 
   const signIn = React.useCallback((email: string, password: string) => {
     dispatch(signInAsyncAction({ email: email, password: password }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signUp = React.useCallback(
@@ -40,14 +39,12 @@ const useAuth = () => {
           avatar: avatar,
         }),
       );
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
     [],
   );
 
   const logout = React.useCallback(() => {
     dispatch(setAccessTokenAction({ accessToken: undefined }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

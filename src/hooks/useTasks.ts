@@ -26,7 +26,6 @@ const useTasks = () => {
 
   const fetchTasks = React.useCallback(() => {
     dispatch(fetchTasksAsyncAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createTask = React.useCallback(
@@ -45,7 +44,7 @@ const useTasks = () => {
         }),
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     [],
   );
 
@@ -69,7 +68,7 @@ const useTasks = () => {
         }),
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     [],
   );
 
@@ -82,7 +81,7 @@ const useTasks = () => {
         }),
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     [],
   );
 

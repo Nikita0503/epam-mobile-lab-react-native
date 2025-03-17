@@ -5,5 +5,6 @@ module.exports = {
     'no-console': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
     'react/no-unstable-nested-components': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
 };
