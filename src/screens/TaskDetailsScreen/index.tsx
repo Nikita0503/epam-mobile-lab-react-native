@@ -1,4 +1,5 @@
 import Header from '@components/headers/Header';
+import TaskFileList from '@components/TaskFileList';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
 import { ITask } from '@interfaces/general';
@@ -66,6 +67,7 @@ const TaskDetailsScreen = ({ task }: IProps) => {
         showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{task.title}</Text>
         <Text style={styles.description}>{task.description}</Text>
+        <TaskFileList files={task.files} />
       </ScrollView>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button} onPress={onDeleteTaskPress}>
