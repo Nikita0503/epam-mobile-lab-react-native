@@ -67,7 +67,11 @@ const TaskDetailsScreen = ({ task }: IProps) => {
         showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{task.title}</Text>
         <Text style={styles.description}>{task.description}</Text>
-        <TaskFileList files={task.files} />
+        <TaskFileList
+          files={task.files}
+          onAddFile={() => {}}
+          onDeleteFile={() => {}}
+        />
       </ScrollView>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button} onPress={onDeleteTaskPress}>

@@ -26,7 +26,6 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
       }
-      console.log({ token: res.token });
       if (onSuccess) {
         onSuccess();
       }
@@ -62,7 +61,6 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
       if (res.token) {
         dispatch(setAccessTokenAction({ accessToken: res.token }));
       }
-      console.log({ token: res.token });
       if (onSuccess) {
         onSuccess();
       }
