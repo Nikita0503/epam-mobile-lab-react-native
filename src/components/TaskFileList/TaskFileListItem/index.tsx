@@ -5,21 +5,24 @@ import styles from './styles';
 import TaskFileListItemModal from './TaskFileListItemModal';
 
 interface IProps {
-  file: IFile;
+  file: File | IFile;
 }
 
 const TaskFileListItem = ({ file }: IProps) => {
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  console.log('http://localhost:5000/' + file.name);
+  const fileUrl = React.useMemo<string>(() => {
+    if (file instanceof File) {
+      return URL.createObjectURL(file).toString();
+    }
+    return `http://localhost:5000/${file.name}`;
+  }, [file]);
+
   return (
     <TouchableOpacity onPress={() => setModalVisible(true)}>
-      <Image
-        source={{ uri: 'http://localhost:5000/' + file.name }}
-        style={styles.image}
-      />
+      <Image source={{ uri: fileUrl }} style={styles.image} />
       <TaskFileListItemModal
-        file={file}
+        fileUrl={fileUrl}
         visible={modalVisible}
         closeModal={() => setModalVisible(false)}
       />
