@@ -57,6 +57,7 @@ const TaskDetailsScreen = ({ task }: IProps) => {
       taskId: task.id,
     });
   }, [task]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -67,11 +68,7 @@ const TaskDetailsScreen = ({ task }: IProps) => {
         showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{task.title}</Text>
         <Text style={styles.description}>{task.description}</Text>
-        <TaskFileList
-          files={task.files}
-          onAddFile={() => {}}
-          onDeleteFile={() => {}}
-        />
+        <TaskFileList files={task.files} />
       </ScrollView>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button} onPress={onDeleteTaskPress}>

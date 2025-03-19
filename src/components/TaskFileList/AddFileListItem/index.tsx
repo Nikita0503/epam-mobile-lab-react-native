@@ -1,3 +1,6 @@
+import useCamera from '@hooks/useCamera';
+import useGallery from '@hooks/useGallery';
+import { uriToFile } from '@utils/helpers';
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import styles from './styles';
@@ -7,8 +10,13 @@ interface IProps {
 }
 
 const AddFileListItem = ({ onAddFile }: IProps) => {
-  const onAddFilePress = React.useCallback(() => {
-    onAddFile(new File());
+  const { pickPhoto } = useGallery();
+  const { takePhoto } = useCamera();
+
+  const onAddFilePress = React.useCallback(async () => {
+    const photo = await pickPhoto();
+    const file = await uriToFile(photo!);
+    onAddFile(file);
   }, []);
 
   return (
