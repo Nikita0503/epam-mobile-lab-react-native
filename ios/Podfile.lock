@@ -1262,10 +1262,28 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-mmkv-storage (0.10.3):
+  - react-native-mmkv-storage (0.11.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
     - MMKV (~> 1.3.9)
-    - React
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
     - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-safe-area-context (5.3.0):
     - DoubleConversion
     - glog
@@ -2035,7 +2053,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 0502faf46cab8fb89cfc7bf3e6c6109b6ef9b5de
   React-microtasksnativemodule: 663bc64e3a96c5fc91081923ae7481adc1359a78
   react-native-image-picker: 0452fc9efc21101946746663bf34e0db5741f00c
-  react-native-mmkv-storage: 36fcafe92a2c4cf19bce96be0b5d587f7a62a2c6
+  react-native-mmkv-storage: 337a2b668cefb1bc66442eee589e72f15b3cba5c
   react-native-safe-area-context: 286b3e7b5589795bb85ffc38faf4c0706c48a092
   React-NativeModulesApple: 16fbd5b040ff6c492dacc361d49e63cba7a6a7a1
   React-perflogger: ab51b7592532a0ea45bf6eed7e6cae14a368b678
