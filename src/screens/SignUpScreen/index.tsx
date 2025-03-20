@@ -1,5 +1,6 @@
+import UserAvatar from '@components/UserAvatar';
 import useAuth from '@hooks/useAuth';
-import AppLogoSvgImage from '@images/AppLogoSvgImage';
+import { INewFile } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AuthStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -21,7 +22,7 @@ const SignUpScreen = () => {
   const [name, setName] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
   const [repeatPassword, setRepeatPassword] = React.useState<string>('');
-  const [avatar, setAvatar] = React.useState<File | undefined>(undefined);
+  const [avatar, setAvatar] = React.useState<INewFile | undefined>(undefined);
 
   const { signUp } = useAuth();
 
@@ -46,8 +47,7 @@ const SignUpScreen = () => {
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.appLogoContainer}>
-          <AppLogoSvgImage />
-          <Text style={styles.appLogoText}>Welcome!</Text>
+          <UserAvatar avatar={avatar} setAvatar={setAvatar} />
         </View>
         <View style={styles.textInputsContainer}>
           <View style={styles.textInputContainer}>

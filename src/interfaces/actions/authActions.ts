@@ -1,3 +1,5 @@
+import { INewFile } from '@interfaces/general';
+
 export interface ISetAccessTokenAction {
   accessToken: string | undefined;
 }
@@ -18,7 +20,7 @@ export interface ISignUpAsyncAction {
   name: string;
   password: string;
   repeatPassword: string;
-  avatar?: File;
+  avatar?: INewFile;
   onSuccess?: () => void;
   onError?: () => void;
 }

@@ -3,6 +3,7 @@ import {
   signInAsyncAction,
   signUpAsyncAction,
 } from '@actions/authActions';
+import { INewFile } from '@interfaces/general';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +29,7 @@ const useAuth = () => {
       name: string,
       password: string,
       repeatPassword: string,
-      avatar: File | undefined,
+      avatar: INewFile | undefined,
     ) => {
       dispatch(
         signUpAsyncAction({

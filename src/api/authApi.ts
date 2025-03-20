@@ -1,3 +1,4 @@
+import { INewFile } from '@interfaces/general';
 import axiosInstance from './axios';
 
 export const signInApi = async (email: string, password: string) => {
@@ -12,7 +13,7 @@ export const signUpApi = async (
   email: string,
   name: string,
   password: string,
-  avatar?: File,
+  avatar?: INewFile,
 ) => {
   const formData = new FormData();
   formData.append('email', email);
