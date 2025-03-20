@@ -1,3 +1,4 @@
+import { INewFile } from '@interfaces/general';
 import axiosInstance from './axios';
 
 export const fetchCurrentUserApi = async () => {
@@ -7,11 +8,18 @@ export const fetchCurrentUserApi = async () => {
 
 export const updateCurrentUserApi = async (
   name: string,
-  avatar?: File | string | undefined,
+  avatar?: INewFile | string | undefined,
 ) => {
+  console.log({ avatar });
   const formData = new FormData();
   formData.append('name', name);
-  if (avatar instanceof File) {
+  if (avatar === undefined) {
+    await axiosInstance.delete('/users/avatar');
+  } else if (
+    typeof avatar !== 'string' &&
+    'type' in avatar &&
+    'uri' in avatar
+  ) {
     formData.append('avatar', avatar);
   }
   const res = await axiosInstance.put('/users', formData);

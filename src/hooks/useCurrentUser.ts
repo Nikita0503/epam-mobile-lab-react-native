@@ -1,5 +1,5 @@
 import { fetchCurrentUserApi, updateCurrentUserApi } from '@api/currentUserApi';
-import { IUser } from '@interfaces/general';
+import { INewFile, IUser } from '@interfaces/general';
 import React from 'react';
 
 const useCurrentUser = () => {
@@ -26,7 +26,7 @@ const useCurrentUser = () => {
   const updateCurrentUser = React.useCallback(
     async (
       name: string,
-      avatar: File | string | undefined,
+      avatar: INewFile | string | undefined,
       onSuccess: () => void,
     ) => {
       setLoading(true);

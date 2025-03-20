@@ -20,7 +20,6 @@ const TaskFileListItem = ({ file, onDeleteFile }: IProps) => {
     return `http://localhost:5000/${file.name}`;
   }, [file]);
 
-  console.log({ fileUrl });
   const onDeleteFilePress = React.useCallback(() => {
     if (onDeleteFile) {
       onDeleteFile(file);
