@@ -13,10 +13,7 @@ interface IProps {
 
 const TaskFileList = ({ files, onDeleteFile, onAddFile }: IProps) => {
   const keyExtractor = React.useCallback((item: File | IFile): string => {
-    if (item instanceof File) {
-      return URL.createObjectURL(item).toString();
-    }
-    return `http://localhost:5000/${item.name}`;
+    return item.name;
   }, []);
 
   return (
