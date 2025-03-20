@@ -1,5 +1,6 @@
 import Header from '@components/headers/Header';
 import TextInputWithHint from '@components/TextInputWithHint';
+import UserAvatar from '@components/UserAvatar';
 import useAuth from '@hooks/useAuth';
 import useCurrentUser from '@hooks/useCurrentUser';
 import { IUser } from '@interfaces/general';
@@ -23,7 +24,11 @@ const CurrentUserScreen = ({ currentUser }: IProps) => {
   const { logout } = useAuth();
   const { updateCurrentUser } = useCurrentUser();
 
+  const [email, setEmail] = React.useState<string>(currentUser.email);
   const [name, setName] = React.useState<string>(currentUser.name);
+  const [avatar, setAvatar] = React.useState<string | undefined>(
+    currentUser.avatar,
+  );
 
   const showCongratulations = React.useCallback(() => {
     Alert.alert('Congratulations!', 'Profile updated successfully');
@@ -42,6 +47,7 @@ const CurrentUserScreen = ({ currentUser }: IProps) => {
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
         <View>
+          <UserAvatar avatar={avatar} />
           <View style={styles.textInputContainer}>
             <TextInputWithHint
               hint="Name"
