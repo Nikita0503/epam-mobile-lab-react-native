@@ -2,7 +2,6 @@ export type TUserRole = 'ADMIN' | 'USER';
 
 export interface IFile {
   id: number;
-  commentId?: number;
   taskId?: number;
   name: string;
 }

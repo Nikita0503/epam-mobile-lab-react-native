@@ -66,21 +66,22 @@ const TaskEditorScreen = ({ task }: IProps) => {
       <ScrollView
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.taskAddPhotoContainer}>
-          {/* <TaskAddPhoto photo={taskPhoto} setPhoto={setTaskPhoto} /> */}
-        </View>
         <View style={styles.content}>
           <View style={styles.infoContainer}>
-            <TextInputWithHint
-              hint="Task title"
-              value={title}
-              onChangeText={setTitle}
-            />
-            <TextInputWithHint
-              hint="Task description"
-              value={description}
-              onChangeText={setDescription}
-            />
+            <View style={styles.infoItemContainer}>
+              <TextInputWithHint
+                hint="Task title"
+                value={title}
+                onChangeText={setTitle}
+              />
+            </View>
+            <View style={styles.infoItemContainer}>
+              <TextInputWithHint
+                hint="Task description"
+                value={description}
+                onChangeText={setDescription}
+              />
+            </View>
           </View>
           <Pressable style={styles.button} onPress={onUpdateTaskPress}>
             <Text style={styles.buttonText}>Save</Text>

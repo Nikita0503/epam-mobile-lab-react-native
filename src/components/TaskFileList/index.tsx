@@ -6,9 +6,9 @@ import TaskFileListItem from './TaskFileListItem';
 import TaskFileListSeparator from './TaskFileListSeparator';
 
 interface IProps {
-  files: File[] | IFile[];
-  onDeleteFile?: (file: File | IFile) => void;
-  onAddFile?: (file: File) => void;
+  files: IFile[];
+  onDeleteFile?: (file: IFile) => void;
+  onAddFile?: (file: IFile) => void;
 }
 
 const TaskFileList = ({ files, onDeleteFile, onAddFile }: IProps) => {

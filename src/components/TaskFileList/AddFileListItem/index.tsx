@@ -1,12 +1,12 @@
 import useCamera from '@hooks/useCamera';
 import useGallery from '@hooks/useGallery';
-import { uriToFile } from '@utils/helpers';
+import { IFile } from '@interfaces/general';
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Alert, Pressable, Text } from 'react-native';
 import styles from './styles';
 
 interface IProps {
-  onAddFile: (file: File) => void;
+  onAddFile: (file: IFile) => void;
 }
 
 const AddFileListItem = ({ onAddFile }: IProps) => {
@@ -14,9 +14,41 @@ const AddFileListItem = ({ onAddFile }: IProps) => {
   const { takePhoto } = useCamera();
 
   const onAddFilePress = React.useCallback(async () => {
-    const photo = await pickPhoto();
-    const file = await uriToFile(photo!);
-    onAddFile(file);
+    const handleChoice = async (choice: 'Gallery' | 'Camera') => {
+      let photo;
+      if (choice === 'Gallery') {
+        photo = await pickPhoto();
+      } else if (choice === 'Camera') {
+        photo = await takePhoto();
+      }
+      if (photo) {
+        const file: any = {
+          uri: photo,
+          name: photo,
+          type: 'image/jpeg',
+        };
+        onAddFile(file);
+      }
+    };
+
+    Alert.alert(
+      'Choose photo source',
+      'Where do you want to take the photo from?',
+      [
+        {
+          text: 'Gallery',
+          onPress: async () => handleChoice('Gallery'),
+        },
+        {
+          text: 'Camera',
+          onPress: async () => handleChoice('Camera'),
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+    );
   }, []);
 
   return (

@@ -6,20 +6,21 @@ import styles from './styles';
 import TaskFileListItemModal from './TaskFileListItemModal';
 
 interface IProps {
-  file: File | IFile;
-  onDeleteFile?: (file: File | IFile) => void;
+  file: IFile;
+  onDeleteFile?: (file: IFile) => void;
 }
 
 const TaskFileListItem = ({ file, onDeleteFile }: IProps) => {
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const fileUrl = React.useMemo<string>(() => {
-    if (file instanceof File) {
-      return URL.createObjectURL(file).toString();
+    if (!file.taskId) {
+      return file.name;
     }
     return `http://localhost:5000/${file.name}`;
   }, [file]);
 
+  console.log({ fileUrl });
   const onDeleteFilePress = React.useCallback(() => {
     if (onDeleteFile) {
       onDeleteFile(file);

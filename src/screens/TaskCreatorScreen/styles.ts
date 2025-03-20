@@ -23,25 +23,9 @@ const styles = StyleSheet.create({
   infoContainer: {
     marginBottom: 8,
   },
-  taskAddPhotoContainer: {},
-  locationCheckBoxContainer: {
-    marginTop: 16,
+  infoItemContainer: {
     marginBottom: 8,
-  },
-  taskTypesContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  taskTypeContainer: {
-    marginBottom: 8,
-    width: '100%',
-  },
-  taskTypesTitleText: {
-    color: '#464963',
-    fontSize: 14,
-    fontWeight: '400',
-    marginVertical: 6,
-    width: '100%',
+    marginTop: 8,
   },
   button: {
     backgroundColor: Colors.yellow,
