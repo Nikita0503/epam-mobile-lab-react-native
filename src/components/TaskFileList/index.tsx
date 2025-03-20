@@ -25,7 +25,7 @@ const TaskFileList = ({ files, onDeleteFile, onAddFile }: IProps) => {
       renderItem={({ item }) => (
         <TaskFileListItem file={item} onDeleteFile={onDeleteFile} />
       )}
-      ListFooterComponent={
+      ListHeaderComponent={
         onAddFile && (() => <AddFileListItem onAddFile={onAddFile} />)
       }
     />

@@ -1,8 +1,9 @@
 import Header from '@components/headers/Header';
+import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
-import { ITask } from '@interfaces/general';
+import { IFile, ITask } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
@@ -27,6 +28,12 @@ const TaskEditorScreen = ({ task }: IProps) => {
   const [description, setDescription] = React.useState<string>(
     task.description,
   );
+  const [oldFiles, setOldFiles] = React.useState<IFile[]>(task.files);
+  const [newFiles, setNewFiles] = React.useState<IFile[]>([]);
+
+  const files = React.useMemo(() => {
+    return [...oldFiles, ...newFiles];
+  }, [oldFiles, newFiles]);
 
   const { updateTask, deleteTask } = useTasks();
 
@@ -37,8 +44,8 @@ const TaskEditorScreen = ({ task }: IProps) => {
   }, []);
 
   const onUpdateTaskPress = React.useCallback(() => {
-    updateTask(task.id, title, description, [], [], goToTasks);
-  }, [task, title, description]);
+    updateTask(task.id, title, description, newFiles, oldFiles, goToTasks);
+  }, [task, title, description, newFiles, oldFiles]);
 
   const onDeleteTaskPress = React.useCallback(() => {
     Alert.alert('Are you sure?', 'Do you wanna delete the task?', [
@@ -54,6 +61,25 @@ const TaskEditorScreen = ({ task }: IProps) => {
       },
     ]);
   }, [task]);
+
+  const onAddFile = React.useCallback(
+    (file: IFile) => {
+      setNewFiles([...newFiles, file]);
+    },
+    [newFiles],
+  );
+
+  const onDeleteFile = React.useCallback(
+    (toDeleteFile: IFile) => {
+      setNewFiles(
+        newFiles.filter((file: IFile) => file.name !== toDeleteFile.name),
+      );
+      setOldFiles(
+        oldFiles.filter((file: IFile) => file.name !== toDeleteFile.name),
+      );
+    },
+    [newFiles, oldFiles],
+  );
 
   return (
     <KeyboardAvoidingView
@@ -80,6 +106,13 @@ const TaskEditorScreen = ({ task }: IProps) => {
                 hint="Task description"
                 value={description}
                 onChangeText={setDescription}
+              />
+            </View>
+            <View style={styles.infoItemContainer}>
+              <TaskFileList
+                files={files}
+                onAddFile={onAddFile}
+                onDeleteFile={onDeleteFile}
               />
             </View>
           </View>
