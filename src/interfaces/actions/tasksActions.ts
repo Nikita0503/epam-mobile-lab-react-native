@@ -1,4 +1,4 @@
-import { IFile, ITask } from '@interfaces/general';
+import { IFile, INewFile, ITask } from '@interfaces/general';
 
 export interface ISetTasksAction {
   tasks: ITask[];
@@ -27,7 +27,7 @@ export interface ISetLoadingAction {
 export interface ICreateTaskAsyncAction {
   title: string;
   description: string;
-  files: File[];
+  files: INewFile[];
   onSuccess?: () => void;
 }
 
@@ -35,7 +35,7 @@ export interface IUpdateTaskAsyncAction {
   taskId: number;
   title: string;
   description: string;
-  files: File[];
+  files: INewFile[];
   oldFiles: IFile[];
   onSuccess?: () => void;
 }

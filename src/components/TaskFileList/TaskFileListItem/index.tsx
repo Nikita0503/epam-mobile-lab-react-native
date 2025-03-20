@@ -1,21 +1,21 @@
 import TaskDeleteSvgImage from '@images/icons/TaskDeleteSvgImage';
-import { IFile } from '@interfaces/general';
+import { IFile, INewFile } from '@interfaces/general';
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import TaskFileListItemModal from './TaskFileListItemModal';
 
 interface IProps {
-  file: IFile;
-  onDeleteFile?: (file: IFile) => void;
+  file: IFile | INewFile;
+  onDeleteFile?: (file: IFile | INewFile) => void;
 }
 
 const TaskFileListItem = ({ file, onDeleteFile }: IProps) => {
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const fileUrl = React.useMemo<string>(() => {
-    if (!file.taskId) {
-      return file.name;
+    if ('type' in file && 'uri' in file) {
+      return file.uri;
     }
     return `http://localhost:5000/${file.name}`;
   }, [file]);

@@ -3,7 +3,7 @@ import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
-import { IFile, ITask } from '@interfaces/general';
+import { IFile, INewFile, ITask } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
@@ -29,7 +29,7 @@ const TaskEditorScreen = ({ task }: IProps) => {
     task.description,
   );
   const [oldFiles, setOldFiles] = React.useState<IFile[]>(task.files);
-  const [newFiles, setNewFiles] = React.useState<IFile[]>([]);
+  const [newFiles, setNewFiles] = React.useState<INewFile[]>([]);
 
   const files = React.useMemo(() => {
     return [...oldFiles, ...newFiles];
@@ -63,17 +63,19 @@ const TaskEditorScreen = ({ task }: IProps) => {
   }, [task]);
 
   const onAddFile = React.useCallback(
-    (file: IFile) => {
+    (file: INewFile) => {
       setNewFiles([...newFiles, file]);
     },
     [newFiles],
   );
 
   const onDeleteFile = React.useCallback(
-    (toDeleteFile: IFile) => {
-      setNewFiles(
-        newFiles.filter((file: IFile) => file.name !== toDeleteFile.name),
-      );
+    (toDeleteFile: IFile | INewFile) => {
+      if ('type' in toDeleteFile && 'uri' in toDeleteFile) {
+        setNewFiles(
+          newFiles.filter((file: INewFile) => file.name !== toDeleteFile.name),
+        );
+      }
       setOldFiles(
         oldFiles.filter((file: IFile) => file.name !== toDeleteFile.name),
       );

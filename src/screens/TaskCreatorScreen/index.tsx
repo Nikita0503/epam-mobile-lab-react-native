@@ -2,7 +2,7 @@ import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
 import useTasks from '@hooks/useTasks';
-import { IFile } from '@interfaces/general';
+import { IFile, INewFile } from '@interfaces/general';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
@@ -18,7 +18,7 @@ import styles from './styles';
 const TaskCreatorScreen = () => {
   const [title, setTitle] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
-  const [files, setFiles] = React.useState<IFile[]>([]);
+  const [files, setFiles] = React.useState<INewFile[]>([]);
 
   const { createTask } = useTasks();
 
@@ -33,15 +33,17 @@ const TaskCreatorScreen = () => {
   }, [title, description, files]);
 
   const onAddFile = React.useCallback(
-    (file: IFile) => {
-      setFiles([...files, file]);
+    (file: IFile | INewFile) => {
+      setFiles([...files, file as INewFile]);
     },
     [files],
   );
 
   const onDeleteFile = React.useCallback(
-    (toDeleteFile: IFile) => {
-      setFiles(files.filter((file: IFile) => file.name !== toDeleteFile.name));
+    (toDeleteFile: IFile | INewFile) => {
+      setFiles(
+        files.filter((file: INewFile) => file.name !== toDeleteFile.name),
+      );
     },
     [files],
   );

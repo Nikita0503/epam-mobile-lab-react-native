@@ -6,6 +6,12 @@ export interface IFile {
   name: string;
 }
 
+export interface INewFile {
+  name: string;
+  type: string;
+  uri: string;
+}
+
 export interface IUser {
   id: number;
   name: string;

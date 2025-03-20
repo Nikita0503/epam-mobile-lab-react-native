@@ -1,12 +1,12 @@
 import useCamera from '@hooks/useCamera';
 import useGallery from '@hooks/useGallery';
-import { IFile } from '@interfaces/general';
+import { INewFile } from '@interfaces/general';
 import React from 'react';
 import { Alert, Pressable, Text } from 'react-native';
 import styles from './styles';
 
 interface IProps {
-  onAddFile: (file: IFile) => void;
+  onAddFile: (file: INewFile) => void;
 }
 
 const AddFileListItem = ({ onAddFile }: IProps) => {
@@ -22,7 +22,7 @@ const AddFileListItem = ({ onAddFile }: IProps) => {
         photo = await takePhoto();
       }
       if (photo) {
-        const file: any = {
+        const file: INewFile = {
           uri: photo,
           name: photo,
           type: 'image/jpeg',

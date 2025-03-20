@@ -4,7 +4,7 @@ import {
   fetchTasksAsyncAction,
   updateTaskAsyncAction,
 } from '@actions/tasksActions';
-import { IFile, ITask } from '@interfaces/general';
+import { IFile, INewFile, ITask } from '@interfaces/general';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ const useTasks = () => {
     (
       title: string,
       description: string,
-      files: File[],
+      files: INewFile[],
       onSuccess?: () => void,
     ) => {
       dispatch(
@@ -52,7 +52,7 @@ const useTasks = () => {
       taskId: number,
       title: string,
       description: string,
-      files: File[],
+      files: INewFile[],
       oldFiles: IFile[],
       onSuccess?: () => void,
     ) => {

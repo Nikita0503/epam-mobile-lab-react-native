@@ -1,3 +1,4 @@
+import { INewFile } from '@interfaces/general';
 import axiosInstance from './axios';
 
 export const fetchTaskApi = async (taskId: number) => {
@@ -13,7 +14,7 @@ export const fetchTasksApi = async () => {
 export const createTaskApi = async (
   title: string,
   description: string,
-  files?: File[],
+  files?: INewFile[],
 ) => {
   const formData = new FormData();
   formData.append('title', title);
@@ -31,7 +32,7 @@ export const updateTaskApi = async (
   taskId: number,
   title: string,
   description: string,
-  files?: File[],
+  files?: INewFile[],
 ) => {
   const formData = new FormData();
   formData.append('title', title);

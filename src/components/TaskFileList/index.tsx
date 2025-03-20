@@ -1,4 +1,4 @@
-import { IFile } from '@interfaces/general';
+import { IFile, INewFile } from '@interfaces/general';
 import React from 'react';
 import { FlatList } from 'react-native';
 import AddFileListItem from './AddFileListItem';
@@ -6,13 +6,13 @@ import TaskFileListItem from './TaskFileListItem';
 import TaskFileListSeparator from './TaskFileListSeparator';
 
 interface IProps {
-  files: IFile[];
-  onDeleteFile?: (file: IFile) => void;
-  onAddFile?: (file: IFile) => void;
+  files: (IFile | INewFile)[];
+  onDeleteFile?: (file: IFile | INewFile) => void;
+  onAddFile?: (file: INewFile) => void;
 }
 
 const TaskFileList = ({ files, onDeleteFile, onAddFile }: IProps) => {
-  const keyExtractor = React.useCallback((item: File | IFile): string => {
+  const keyExtractor = React.useCallback((item: IFile | INewFile): string => {
     return item.name;
   }, []);
 
