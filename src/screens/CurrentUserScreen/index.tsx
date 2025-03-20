@@ -3,7 +3,7 @@ import TextInputWithHint from '@components/TextInputWithHint';
 import UserAvatar from '@components/UserAvatar';
 import useAuth from '@hooks/useAuth';
 import useCurrentUser from '@hooks/useCurrentUser';
-import { INewFile, IUser } from '@interfaces/general';
+import { INewFile } from '@interfaces/general';
 import React from 'react';
 import {
   Alert,
@@ -14,20 +14,30 @@ import {
   Text,
   View,
 } from 'react-native';
+import { RefreshControl } from 'react-native-gesture-handler';
 import styles from './styles';
 
-interface IProps {
-  currentUser: IUser;
-}
-
-const CurrentUserScreen = ({ currentUser }: IProps) => {
+const CurrentUserScreen = () => {
   const { logout } = useAuth();
-  const { updateCurrentUser } = useCurrentUser();
+  const { currentUser, error, loading, fetchCurrentUser, updateCurrentUser } =
+    useCurrentUser();
 
-  const [email] = React.useState<string>(currentUser.email);
-  const [name, setName] = React.useState<string>(currentUser.name);
+  React.useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setEmail(currentUser.email);
+      setName(currentUser.name);
+      setAvatar(currentUser.avatar);
+    }
+  }, [currentUser]);
+
+  const [email, setEmail] = React.useState<string>('');
+  const [name, setName] = React.useState<string>('');
   const [avatar, setAvatar] = React.useState<INewFile | string | undefined>(
-    currentUser.avatar,
+    undefined,
   );
 
   const showCongratulations = React.useCallback(() => {
@@ -44,6 +54,9 @@ const CurrentUserScreen = ({ currentUser }: IProps) => {
       style={styles.container}>
       <Header title="Profile" hideBackButton={true} />
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={fetchCurrentUser} />
+        }
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
         <View>
@@ -72,18 +85,4 @@ const CurrentUserScreen = ({ currentUser }: IProps) => {
   );
 };
 
-const CurrentUserScreenWrapper = () => {
-  const { currentUser, error, loading, fetchCurrentUser } = useCurrentUser();
-
-  React.useEffect(() => {
-    fetchCurrentUser();
-  }, []);
-
-  if (loading) {
-    return <View />;
-  }
-
-  return <CurrentUserScreen currentUser={currentUser!} />;
-};
-
-export default CurrentUserScreenWrapper;
+export default CurrentUserScreen;
