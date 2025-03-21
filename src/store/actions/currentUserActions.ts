@@ -9,6 +9,7 @@ import {
   ISetLoadingAction,
   IUpdateCurrentUserAsyncAction,
 } from '@interfaces/actions/currentUserActions';
+import { INewFile } from '@interfaces/general';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { handleErrorResponse } from '@utils/errorHandlers';
 
@@ -53,10 +54,17 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
   ) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
-      if (!avatar) {
+      let newAvatar: INewFile | undefined;
+      if (avatar === undefined) {
         await deleteCurrentUserAvatarApi();
+      } else if (
+        typeof avatar !== 'string' &&
+        'type' in avatar &&
+        'uri' in avatar
+      ) {
+        newAvatar = avatar;
       }
-      const res = await updateCurrentUserApi(name, avatar);
+      const res = await updateCurrentUserApi(name, newAvatar);
       console.log('Updated User: ', res);
       dispatch(fetchCurrentUserAsyncAction());
       if (onSuccess) {

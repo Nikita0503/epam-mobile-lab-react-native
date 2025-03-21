@@ -1,26 +1,29 @@
-import { fetchCurrentUserApi, updateCurrentUserApi } from '@api/currentUserApi';
+import {
+  fetchCurrentUserAsyncAction,
+  updateCurrentUserAsyncAction,
+} from '@actions/currentUserActions';
 import { INewFile, IUser } from '@interfaces/general';
+import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useCurrentUser = () => {
-  const [currentUser, setCurrentUser] = React.useState<IUser | undefined>(
-    undefined,
+  const dispatch = useDispatch<TAppDispatch>();
+
+  const currentUser = useSelector<TRootState, IUser | undefined>(
+    (state: TRootState) => state.currentUser.currentUser,
   );
-  const [error, setError] = React.useState<any>(undefined);
-  const [loading, setLoading] = React.useState<boolean>(true);
+
+  const error = useSelector<TRootState, any>(
+    (state: TRootState) => state.currentUser.error,
+  );
+
+  const loading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.currentUser.loading,
+  );
 
   const fetchCurrentUser = React.useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await fetchCurrentUserApi();
-      if (response.user) {
-        setCurrentUser(response.user);
-      }
-    } catch (e) {
-      setError(e);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(fetchCurrentUserAsyncAction());
   }, []);
 
   const updateCurrentUser = React.useCallback(
@@ -29,18 +32,13 @@ const useCurrentUser = () => {
       avatar: INewFile | string | undefined,
       onSuccess: () => void,
     ) => {
-      setLoading(true);
-      try {
-        await updateCurrentUserApi(name, avatar);
-        fetchCurrentUser();
-        if (onSuccess) {
-          onSuccess();
-        }
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoading(false);
-      }
+      dispatch(
+        updateCurrentUserAsyncAction({
+          name: name,
+          avatar: avatar,
+          onSuccess: onSuccess,
+        }),
+      );
     },
     [],
   );

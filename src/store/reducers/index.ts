@@ -4,19 +4,10 @@ import MMKVStorage from 'react-native-mmkv-storage';
 import { persistReducer } from 'redux-persist';
 import authReducer from './authReducer';
 import commonTasksReducer from './commonTasksReducer';
+import currentUserReducer from './currentUserReducer';
 import tasksReducer from './tasksReducer';
 
 const MMKV = new MMKVStorage.Loader().initialize();
-
-const commonTasksPersistConfig = {
-  key: 'commonTasks',
-  storage: AsyncStorage,
-};
-
-const tasksPersistConfig = {
-  key: 'tasks',
-  storage: AsyncStorage,
-};
 
 const authPersistConfig = {
   key: 'auth',
@@ -27,10 +18,26 @@ const authPersistConfig = {
   },
 };
 
+const commonTasksPersistConfig = {
+  key: 'commonTasks',
+  storage: AsyncStorage,
+};
+
+const currentUserPersistConfig = {
+  key: 'currentUser',
+  storage: AsyncStorage,
+};
+
+const tasksPersistConfig = {
+  key: 'tasks',
+  storage: AsyncStorage,
+};
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  tasks: persistReducer(tasksPersistConfig, tasksReducer),
   commonTasks: persistReducer(commonTasksPersistConfig, commonTasksReducer),
+  currentUser: persistReducer(currentUserPersistConfig, currentUserReducer),
+  tasks: persistReducer(tasksPersistConfig, tasksReducer),
 });
 
 export default rootReducer;

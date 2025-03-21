@@ -1,4 +1,4 @@
-import { IUser } from '@interfaces/general';
+import { INewFile, IUser } from '@interfaces/general';
 
 export interface ISetCurrentUserAction {
   currentUser: IUser;
@@ -14,6 +14,6 @@ export interface ISetLoadingAction {
 
 export interface IUpdateCurrentUserAsyncAction {
   name: string;
-  avatar: File | string | undefined;
+  avatar: INewFile | string | undefined;
   onSuccess?: () => void;
 }
