@@ -24,7 +24,7 @@ export const fetchAllTasksAsyncAction = createAsyncThunk(
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchAllTaskApi();
-      const tasks = res.tasks.reverse();
+      const tasks = res.tasks;
       dispatch(setAllTasksAction({ allTasks: tasks }));
       dispatch(setErrorAction({ error: undefined }));
     } catch (e: any) {
