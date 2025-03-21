@@ -1,3 +1,4 @@
+import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TextInputWithHint from '@components/TextInputWithHint';
 import UserAvatar from '@components/UserAvatar';
@@ -9,9 +10,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
-  Text,
   View,
 } from 'react-native';
 import { RefreshControl } from 'react-native-gesture-handler';
@@ -73,12 +72,14 @@ const CurrentUserScreen = () => {
           </View>
         </View>
         <View>
-          <Pressable style={styles.button} onPress={onUpdateCurrentUserPress}>
-            <Text style={styles.buttonText}>Update</Text>
-          </Pressable>
-          <Pressable style={styles.button} onPress={logout}>
-            <Text style={styles.buttonText}>Logout</Text>
-          </Pressable>
+          <CustomButton
+            buttonStyle={styles.button}
+            onPress={onUpdateCurrentUserPress}>
+            Update
+          </CustomButton>
+          <CustomButton buttonStyle={styles.button} onPress={logout}>
+            Logout
+          </CustomButton>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

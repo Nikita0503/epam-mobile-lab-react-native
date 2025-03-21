@@ -1,3 +1,4 @@
+import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
@@ -12,9 +13,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
-  Text,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -118,9 +117,9 @@ const TaskEditorScreen = ({ task }: IProps) => {
               />
             </View>
           </View>
-          <Pressable style={styles.button} onPress={onUpdateTaskPress}>
-            <Text style={styles.buttonText}>Save</Text>
-          </Pressable>
+          <CustomButton buttonStyle={styles.button} onPress={onUpdateTaskPress}>
+            Save
+          </CustomButton>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

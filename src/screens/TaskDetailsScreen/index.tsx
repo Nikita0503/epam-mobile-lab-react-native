@@ -1,3 +1,4 @@
+import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
 import useTask from '@hooks/useTask';
@@ -16,7 +17,6 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   Text,
   View,
@@ -71,12 +71,12 @@ const TaskDetailsScreen = ({ task }: IProps) => {
         <TaskFileList files={task.files} />
       </ScrollView>
       <View style={styles.buttonsContainer}>
-        <Pressable style={styles.button} onPress={onDeleteTaskPress}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={goToTaskEditor}>
-          <Text style={styles.buttonText}>Edit</Text>
-        </Pressable>
+        <CustomButton buttonStyle={styles.button} onPress={onDeleteTaskPress}>
+          Delete
+        </CustomButton>
+        <CustomButton buttonStyle={styles.button} onPress={goToTaskEditor}>
+          Edit
+        </CustomButton>
       </View>
     </KeyboardAvoidingView>
   );

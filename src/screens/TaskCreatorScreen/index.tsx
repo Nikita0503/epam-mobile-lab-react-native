@@ -1,3 +1,4 @@
+import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
@@ -5,14 +6,7 @@ import useTasks from '@hooks/useTasks';
 import { IFile, INewFile } from '@interfaces/general';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import styles from './styles';
 
 const TaskCreatorScreen = () => {
@@ -80,9 +74,9 @@ const TaskCreatorScreen = () => {
               />
             </View>
           </View>
-          <Pressable style={styles.button} onPress={onCreateTaskPress}>
-            <Text style={styles.buttonText}>Save</Text>
-          </Pressable>
+          <CustomButton buttonStyle={styles.button} onPress={onCreateTaskPress}>
+            Save
+          </CustomButton>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

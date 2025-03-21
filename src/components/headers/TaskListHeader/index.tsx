@@ -1,8 +1,9 @@
+import CustomButton from '@components/CustomButton';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import styles from './styles';
 
 interface IProps {
@@ -28,9 +29,12 @@ const TaskListHeader = ({ taskCount }: IProps) => {
     <View style={styles.container}>
       <View style={styles.addTaskContainer}>
         <Text style={styles.addTaskTitle}>Hello, there</Text>
-        <Pressable onPress={goToAddTaskScreen} style={styles.addTaskButton}>
-          <Text style={styles.addTaskButtonText}>+ Add task</Text>
-        </Pressable>
+        <CustomButton
+          buttonTextStyle={styles.addTaskButtonText}
+          buttonStyle={styles.addTaskButton}
+          onPress={goToAddTaskScreen}>
+          + Add task
+        </CustomButton>
       </View>
       <View style={styles.taskCountContainer}>
         <Text style={styles.taskCountText}>
