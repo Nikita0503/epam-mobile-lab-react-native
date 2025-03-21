@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 12,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.gray,
+    justifyContent: 'space-between',
   },
   buttonContainer: {
     width: '50%',

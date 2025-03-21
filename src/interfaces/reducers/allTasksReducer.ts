@@ -1,7 +1,7 @@
 import { ITask } from '@interfaces/general';
 
-export interface ITasksReducerState {
-  tasks: ITask[];
+export interface IAllTasksReducerState {
+  allTasks: ITask[];
   error: any;
   loading: boolean;
 }
