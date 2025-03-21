@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-const GeneratorScreenTabInactive = (props: any) => (
+const CommonTasksScreenTabInactive = (props: any) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -22,4 +22,4 @@ const GeneratorScreenTabInactive = (props: any) => (
     />
   </Svg>
 );
-export default GeneratorScreenTabInactive;
+export default CommonTasksScreenTabInactive;

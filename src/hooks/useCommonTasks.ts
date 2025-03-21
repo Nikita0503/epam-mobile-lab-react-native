@@ -1,34 +1,34 @@
-import { fetchAllTasksAsyncAction } from '@actions/allTasksActions';
+import { fetchCommonTasksAsyncAction } from '@actions/commonTasksActions';
 import { ITask } from '@interfaces/general';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const useAllTasks = () => {
+const useCommonTasks = () => {
   const dispatch = useDispatch<TAppDispatch>();
 
   const allTasks = useSelector<TRootState, ITask[]>(
-    (state: TRootState) => state.allTasks.allTasks,
+    (state: TRootState) => state.commonTasks.commonTasks,
   );
 
   const error = useSelector<TRootState, any>(
-    (state: TRootState) => state.tasks.error,
+    (state: TRootState) => state.commonTasks.error,
   );
 
   const loading = useSelector<TRootState, boolean>(
-    (state: TRootState) => state.tasks.loading,
+    (state: TRootState) => state.commonTasks.loading,
   );
 
-  const fetchAllTasks = React.useCallback(() => {
-    dispatch(fetchAllTasksAsyncAction());
+  const fetchCommonTasks = React.useCallback(() => {
+    dispatch(fetchCommonTasksAsyncAction());
   }, []);
 
   return {
     allTasks,
     error,
     loading,
-    fetchAllTasks,
+    fetchCommonTasks,
   };
 };
 
-export default useAllTasks;
+export default useCommonTasks;

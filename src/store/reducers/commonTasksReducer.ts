@@ -1,24 +1,24 @@
-import { IAllTasksReducerState } from '@interfaces/reducers/allTasksReducer';
+import { ICommonTasksReducerState } from '@interfaces/reducers/commonTasksReducer';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  setAllTasksAction,
+  setCommonTasksAction,
   setErrorAction,
   setLoadingAction,
-} from '../actions/allTasksActions';
+} from '../actions/commonTasksActions';
 
-const initialState: IAllTasksReducerState = {
-  allTasks: [],
+const initialState: ICommonTasksReducerState = {
+  commonTasks: [],
   error: undefined,
   loading: false,
 };
 
-const allTasksReducer = createReducer<IAllTasksReducerState>(
+const allTasksReducer = createReducer<ICommonTasksReducerState>(
   initialState,
   builder =>
     builder
-      .addCase(setAllTasksAction, (store, { payload: { allTasks } }) => ({
+      .addCase(setCommonTasksAction, (store, { payload: { tasks } }) => ({
         ...store,
-        allTasks: allTasks,
+        commonTasks: tasks,
       }))
       .addCase(setErrorAction, (store, { payload: { error } }) => ({
         ...store,

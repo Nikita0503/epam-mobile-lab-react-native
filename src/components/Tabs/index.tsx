@@ -1,13 +1,13 @@
-import GeneratorScreenTabActive from '@images/icons/tabs/GeneratorScreenTabActive';
-import GeneratorScreenTabInactive from '@images/icons/tabs/GeneratorScreenTabInactive';
-import MapScreenTabActive from '@images/icons/tabs/MapScreenTabActive';
-import MapScreenTabInactive from '@images/icons/tabs/MapScreenTabInactive';
+import CommonTasksScreenTabActive from '@images/icons/tabs/CommonTasksScreenTabActive';
+import CommonTasksScreenTabInactive from '@images/icons/tabs/CommonTasksScreenTabInactive';
+import ProfileScreenTabActive from '@images/icons/tabs/ProfileScreenTabActive';
+import ProfileScreenTabInactive from '@images/icons/tabs/ProfileScreenTabInactive';
 import TasksScreenTabActive from '@images/icons/tabs/TasksScreenTabActive';
 import TasksScreenTabInactive from '@images/icons/tabs/TasksScreenTabInactive';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { TabsStackParamList } from '@interfaces/navigation/routeParams';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AllTasksScreen from '@screens/AllTasksScreen';
+import CommonTasksScreen from '@screens/CommonTasksScreen';
 import CurrentUserScreen from '@screens/CurrentUserScreen';
 import TasksScreen from '@screens/TasksScreen';
 import React from 'react';
@@ -32,19 +32,19 @@ const Tabs = () => {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ focused }) =>
-            focused ? <MapScreenTabActive /> : <MapScreenTabInactive />,
+            focused ? <ProfileScreenTabActive /> : <ProfileScreenTabInactive />,
         }}
       />
       <TabsStack.Screen
-        name={ERouteNames.ALL_TASKS_SCREEN}
-        component={AllTasksScreen}
+        name={ERouteNames.COMMON_TASKS_SCREEN}
+        component={CommonTasksScreen}
         options={{
-          tabBarLabel: 'All Tasks',
+          tabBarLabel: 'Common Tasks',
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <GeneratorScreenTabActive />
+              <CommonTasksScreenTabActive />
             ) : (
-              <GeneratorScreenTabInactive />
+              <CommonTasksScreenTabInactive />
             ),
         }}
       />

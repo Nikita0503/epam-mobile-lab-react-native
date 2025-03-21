@@ -16,5 +16,5 @@ export type AppStackParamList = {
 export type TabsStackParamList = {
   [ERouteNames.TASKS_SCREEN]: undefined;
   [ERouteNames.CURRENT_USER]: undefined;
-  [ERouteNames.ALL_TASKS_SCREEN]: undefined;
+  [ERouteNames.COMMON_TASKS_SCREEN]: undefined;
 };

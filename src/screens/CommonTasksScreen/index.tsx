@@ -1,28 +1,28 @@
 import Header from '@components/headers/Header';
 import TaskList from '@components/tasks/TaskList';
-import useAllTasks from '@hooks/useAllTasks';
+import useCommonTasks from '@hooks/useCommonTasks';
 import React from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 
-const AllTasksScreen = () => {
-  const { allTasks, error, loading, fetchAllTasks } = useAllTasks();
+const CommonTasksScreen = () => {
+  const { allTasks, error, loading, fetchCommonTasks } = useCommonTasks();
 
   React.useEffect(() => {
-    fetchAllTasks();
+    fetchCommonTasks();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Header title="All Tasks" hideBackButton={true} />
+      <Header title="Common Tasks" hideBackButton={true} />
       <TaskList
         tasks={allTasks}
         error={error}
         loading={loading}
-        fetchTasks={fetchAllTasks}
+        fetchTasks={fetchCommonTasks}
       />
     </View>
   );
 };
 
-export default AllTasksScreen;
+export default CommonTasksScreen;
