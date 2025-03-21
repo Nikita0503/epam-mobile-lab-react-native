@@ -1,17 +1,16 @@
+import CustomButton from '@components/CustomButton';
+import TextInputWithHint from '@components/TextInputWithHint';
 import useAuth from '@hooks/useAuth';
 import AppLogoSvgImage from '@images/AppLogoSvgImage';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AuthStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { Colors } from '@theme/colors';
 import React from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -48,31 +47,31 @@ const LoginScreen = () => {
         </View>
         <View style={styles.textInputsContainer}>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Login</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Email"
               value={email}
               onChangeText={setEmail}
-              cursorColor={Colors.white}
-              style={styles.textInput}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
             />
           </View>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Password</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Password"
               value={password}
               onChangeText={setPassword}
-              cursorColor={Colors.white}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
               secureTextEntry={true}
-              style={styles.textInput}
             />
           </View>
         </View>
-        <Pressable style={styles.button} onPress={onLoginPress}>
-          <Text style={styles.buttonText}>Log In</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={goToSignUp}>
-          <Text style={styles.buttonText}>Go to Sign Up</Text>
-        </Pressable>
+        <CustomButton buttonStyle={styles.button} onPress={onLoginPress}>
+          Log in
+        </CustomButton>
+        <CustomButton buttonStyle={styles.button} onPress={goToSignUp}>
+          Go to Sign Up
+        </CustomButton>
       </ScrollView>
     </KeyboardAvoidingView>
   );

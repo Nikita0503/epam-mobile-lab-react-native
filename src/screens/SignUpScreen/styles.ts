@@ -49,18 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   button: {
-    backgroundColor: Colors.yellow,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: Dimensions.get('screen').width * 0.9,
-    height: 60,
-    borderRadius: 12,
     marginBottom: 12,
-  },
-  buttonText: {
-    color: Colors.darkBlue,
-    fontSize: 18,
-    fontWeight: '600',
   },
 });
 

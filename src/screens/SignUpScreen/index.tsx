@@ -1,20 +1,13 @@
+import CustomButton from '@components/CustomButton';
+import TextInputWithHint from '@components/TextInputWithHint';
 import UserAvatar from '@components/UserAvatar';
 import useAuth from '@hooks/useAuth';
 import { INewFile } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AuthStackParamList } from '@interfaces/navigation/routeParams';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { Colors } from '@theme/colors';
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import styles from './styles';
 
 const SignUpScreen = () => {
@@ -51,50 +44,48 @@ const SignUpScreen = () => {
         </View>
         <View style={styles.textInputsContainer}>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Email</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Email"
               value={email}
               onChangeText={setEmail}
-              cursorColor={Colors.white}
-              style={styles.textInput}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
             />
           </View>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Name</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Name"
               value={name}
               onChangeText={setName}
-              cursorColor={Colors.white}
-              style={styles.textInput}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
             />
           </View>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Password</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Password"
               value={password}
               onChangeText={setPassword}
-              cursorColor={Colors.white}
-              secureTextEntry={true}
-              style={styles.textInput}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
             />
           </View>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputTitle}>Repeat password</Text>
-            <TextInput
+            <TextInputWithHint
+              hint="Repeat password"
               value={repeatPassword}
               onChangeText={setRepeatPassword}
-              cursorColor={Colors.white}
-              secureTextEntry={true}
-              style={styles.textInput}
+              hintTextStyle={styles.textInputTitle}
+              textInputStyle={styles.textInput}
             />
           </View>
         </View>
-        <Pressable style={styles.button} onPress={onSignUpPress}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={goToSignIn}>
-          <Text style={styles.buttonText}>Go to Sign In</Text>
-        </Pressable>
+        <CustomButton buttonStyle={styles.button} onPress={onSignUpPress}>
+          Sign Up
+        </CustomButton>
+        <CustomButton buttonStyle={styles.button} onPress={goToSignIn}>
+          Go to Sign In
+        </CustomButton>
       </ScrollView>
     </KeyboardAvoidingView>
   );
