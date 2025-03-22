@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  errorContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;

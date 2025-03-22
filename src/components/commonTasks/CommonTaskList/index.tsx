@@ -1,8 +1,9 @@
+import UniversalError from '@components/UniversalError';
 import { ITask } from '@interfaces/general';
 import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import CommonTaskListItem from './CommonTaskListItem';
-import CommonTaskListLoader from './CommonTaskListLoader';
+import CommonTaskListFooter from './CommonTaskListLoader';
 import CommonTaskListSeparator from './CommonTaskListSeparator';
 import styles from './styles';
 
@@ -25,6 +26,15 @@ const CommonTaskList = ({
   fetchCommonTasks,
   fetchMoreCommonTasks,
 }: IProps) => {
+  if (error) {
+    return (
+      <UniversalError
+        errorText="Something went wrong"
+        buttonText="Update Common Task List"
+        onHandleError={fetchCommonTasks}
+      />
+    );
+  }
   return (
     <FlatList
       style={styles.container}
@@ -39,7 +49,10 @@ const CommonTaskList = ({
       onEndReached={fetchMoreCommonTasks}
       onEndReachedThreshold={0.2}
       ListFooterComponent={() => (
-        <CommonTaskListLoader loading={moreCommonTasksLoading} />
+        <CommonTaskListFooter
+          loading={moreCommonTasksLoading}
+          error={moreCommonTasksError}
+        />
       )}
     />
   );
