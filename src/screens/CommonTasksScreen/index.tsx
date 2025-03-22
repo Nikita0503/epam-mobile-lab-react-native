@@ -6,8 +6,15 @@ import { View } from 'react-native';
 import styles from './styles';
 
 const CommonTasksScreen = () => {
-  const { allTasks, error, loading, fetchCommonTasks, fetchMoreCommonTasks } =
-    useCommonTasks();
+  const {
+    allTasks,
+    error,
+    loading,
+    moreCommonTasksError,
+    moreCommonTasksLoading,
+    fetchCommonTasks,
+    fetchMoreCommonTasks,
+  } = useCommonTasks();
 
   React.useEffect(() => {
     fetchCommonTasks();
@@ -20,6 +27,8 @@ const CommonTasksScreen = () => {
         tasks={allTasks}
         error={error}
         loading={loading}
+        moreCommonTasksError={moreCommonTasksError}
+        moreCommonTasksLoading={moreCommonTasksLoading}
         fetchCommonTasks={fetchCommonTasks}
         fetchMoreCommonTasks={fetchMoreCommonTasks}
       />

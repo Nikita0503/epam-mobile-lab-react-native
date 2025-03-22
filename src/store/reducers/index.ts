@@ -18,11 +18,6 @@ const authPersistConfig = {
   },
 };
 
-const commonTasksPersistConfig = {
-  key: 'commonTasks',
-  storage: AsyncStorage,
-};
-
 const currentUserPersistConfig = {
   key: 'currentUser',
   storage: AsyncStorage,
@@ -35,7 +30,7 @@ const tasksPersistConfig = {
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  commonTasks: persistReducer(commonTasksPersistConfig, commonTasksReducer),
+  commonTasks: commonTasksReducer,
   currentUser: persistReducer(currentUserPersistConfig, currentUserReducer),
   tasks: persistReducer(tasksPersistConfig, tasksReducer),
 });
