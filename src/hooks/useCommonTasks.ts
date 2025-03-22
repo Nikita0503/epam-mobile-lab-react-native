@@ -1,4 +1,7 @@
-import { fetchCommonTasksAsyncAction } from '@actions/commonTasksActions';
+import {
+  fetchCommonTasksAsyncAction,
+  fetchMoreCommonTasksAsyncAction,
+} from '@actions/commonTasksActions';
 import { ITask } from '@interfaces/general';
 import { TAppDispatch, TRootState } from '@store';
 import React from 'react';
@@ -19,15 +22,30 @@ const useCommonTasks = () => {
     (state: TRootState) => state.commonTasks.loading,
   );
 
+  const moreCommonTasksError = useSelector<TRootState, any>(
+    (state: TRootState) => state.commonTasks.moreCommonTasksError,
+  );
+
+  const moreCommonTasksLoading = useSelector<TRootState, boolean>(
+    (state: TRootState) => state.commonTasks.moreCommonTasksLoading,
+  );
+
   const fetchCommonTasks = React.useCallback(() => {
     dispatch(fetchCommonTasksAsyncAction());
+  }, []);
+
+  const fetchMoreCommonTasks = React.useCallback(() => {
+    dispatch(fetchMoreCommonTasksAsyncAction());
   }, []);
 
   return {
     allTasks,
     error,
     loading,
+    moreCommonTasksError,
+    moreCommonTasksLoading,
     fetchCommonTasks,
+    fetchMoreCommonTasks,
   };
 };
 

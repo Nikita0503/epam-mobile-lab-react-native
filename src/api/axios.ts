@@ -1,4 +1,5 @@
 import { setAccessTokenAction } from '@actions/authActions';
+import { BASE_URL } from '@constants';
 import store from '@store';
 import axios, {
   AxiosError,
@@ -7,8 +8,7 @@ import axios, {
 } from 'axios';
 
 const axiosInstance = axios.create({
-  // baseURL: 'https://nodejs-jira-pet-project.onrender.com/api',
-  baseURL: 'http://localhost:5000/api',
+  baseURL: BASE_URL,
 });
 
 axiosInstance.interceptors.request.use(

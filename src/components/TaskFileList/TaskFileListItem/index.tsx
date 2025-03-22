@@ -1,3 +1,4 @@
+import { IMAGE_BASE_URL } from '@constants';
 import TaskDeleteSvgImage from '@images/icons/TaskDeleteSvgImage';
 import { IFile, INewFile } from '@interfaces/general';
 import React from 'react';
@@ -17,7 +18,7 @@ const TaskFileListItem = ({ file, onDeleteFile }: IProps) => {
     if ('type' in file && 'uri' in file) {
       return file.uri;
     }
-    return `http://localhost:5000/${file.name}`;
+    return `${IMAGE_BASE_URL}/${file.name}`;
   }, [file]);
 
   const onDeleteFilePress = React.useCallback(() => {

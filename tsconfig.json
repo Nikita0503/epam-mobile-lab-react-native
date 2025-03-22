@@ -12,6 +12,7 @@
       "@images/*": ["src/assets/*"],
       "@theme/*": ["src/theme/*"],
       "@contexts/*": ["src/contexts/*"],
+      "@constants": ["src/constants"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@store": ["src/store"],

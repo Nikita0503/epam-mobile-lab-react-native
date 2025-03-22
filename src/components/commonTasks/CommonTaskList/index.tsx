@@ -10,6 +10,7 @@ interface IProps {
   error: any;
   loading: boolean;
   fetchCommonTasks: () => void;
+  fetchMoreCommonTasks: () => void;
 }
 
 const CommonTaskList = ({
@@ -17,6 +18,7 @@ const CommonTaskList = ({
   error,
   loading,
   fetchCommonTasks,
+  fetchMoreCommonTasks,
 }: IProps) => {
   return (
     <FlatList
@@ -29,6 +31,8 @@ const CommonTaskList = ({
       ItemSeparatorComponent={CommonTaskListSeparator}
       keyExtractor={(item: ITask) => item.id.toString()}
       renderItem={({ item }) => <CommonTaskListItem task={item} />}
+      onEndReached={fetchMoreCommonTasks}
+      onEndReachedThreshold={0.2}
     />
   );
 };

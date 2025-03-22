@@ -16,6 +16,7 @@ module.exports = {
           '@selectors': './src/store/selectors',
           '@theme': './src/theme',
           '@contexts': './src/contexts',
+          '@constants': './src/constants',
           '@hooks': './src/hooks',
           '@utils': './src/utils',
           '@images': './src/assets',
