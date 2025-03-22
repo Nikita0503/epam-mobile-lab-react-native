@@ -5,8 +5,8 @@ import styles from './styles';
 
 interface IProps {
   loadingText: string;
-  buttonText: string;
-  onHandleLoading: () => void;
+  buttonText?: string;
+  onHandleLoading?: () => void;
 }
 
 const UniversalLoading = ({
@@ -24,11 +24,13 @@ const UniversalLoading = ({
       />
       <Text style={styles.loadingText}>{loadingText}</Text>
       <ActivityIndicator size="large" />
-      <CustomButton
-        buttonStyle={styles.loadingButton}
-        onPress={onHandleLoading}>
-        {buttonText}
-      </CustomButton>
+      {buttonText && onHandleLoading && (
+        <CustomButton
+          buttonStyle={styles.loadingButton}
+          onPress={onHandleLoading}>
+          {buttonText}
+        </CustomButton>
+      )}
     </View>
   );
 };

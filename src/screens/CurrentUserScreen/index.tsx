@@ -1,6 +1,8 @@
 import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TextInputWithHint from '@components/TextInputWithHint';
+import UniversalError from '@components/UniversalError';
+import UniversalLoading from '@components/UniversalLoading';
 import UserAvatar from '@components/UserAvatar';
 import useAuth from '@hooks/useAuth';
 import useCurrentUser from '@hooks/useCurrentUser';
@@ -54,33 +56,51 @@ const CurrentUserScreen = () => {
       <Header title="Profile" hideBackButton={true} />
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={fetchCurrentUser} />
+          <RefreshControl refreshing={false} onRefresh={fetchCurrentUser} />
         }
         contentContainerStyle={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}>
-        <View>
-          <UserAvatar avatar={avatar} setAvatar={setAvatar} />
-          <View style={styles.textInputContainer}>
-            <TextInputWithHint
-              hint="Name"
-              value={name}
-              onChangeText={setName}
-            />
-          </View>
-          <View style={styles.textInputContainer}>
-            <TextInputWithHint hint="Email" value={email} editable={false} />
-          </View>
-        </View>
-        <View>
-          <CustomButton
-            buttonStyle={styles.button}
-            onPress={onUpdateCurrentUserPress}>
-            Update
-          </CustomButton>
-          <CustomButton buttonStyle={styles.button} onPress={logout}>
-            Logout
-          </CustomButton>
-        </View>
+        {loading && (
+          <UniversalLoading loadingText="Your profile is loading..." />
+        )}
+        {!loading && error && (
+          <UniversalError
+            errorText="Something went wrong. Probably user was not found"
+            buttonText="Update Profile"
+            onHandleError={fetchCurrentUser}
+          />
+        )}
+        {!error && !loading && currentUser && (
+          <>
+            <View>
+              <UserAvatar avatar={avatar} setAvatar={setAvatar} />
+              <View style={styles.textInputContainer}>
+                <TextInputWithHint
+                  hint="Name"
+                  value={name}
+                  onChangeText={setName}
+                />
+              </View>
+              <View style={styles.textInputContainer}>
+                <TextInputWithHint
+                  hint="Email"
+                  value={email}
+                  editable={false}
+                />
+              </View>
+            </View>
+            <View>
+              <CustomButton
+                buttonStyle={styles.button}
+                onPress={onUpdateCurrentUserPress}>
+                Update
+              </CustomButton>
+              <CustomButton buttonStyle={styles.button} onPress={logout}>
+                Logout
+              </CustomButton>
+            </View>
+          </>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
