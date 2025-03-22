@@ -1,3 +1,4 @@
+import UniversalErrorComponent from '@components/UniversalErrorComponent';
 import { ITask } from '@interfaces/general';
 import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
@@ -13,6 +14,15 @@ interface IProps {
 }
 
 const TaskList = ({ tasks, error, loading, fetchTasks }: IProps) => {
+  if (error) {
+    return (
+      <UniversalErrorComponent
+        errorText="Something went wrong"
+        buttonText="Update Task List"
+        onHandleError={fetchTasks}
+      />
+    );
+  }
   return (
     <FlatList
       style={styles.container}
