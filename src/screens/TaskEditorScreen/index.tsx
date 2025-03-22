@@ -2,6 +2,8 @@ import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
 import TextInputWithHint from '@components/TextInputWithHint';
+import UniversalError from '@components/UniversalError';
+import UniversalLoading from '@components/UniversalLoading';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
 import { IFile, INewFile, ITask } from '@interfaces/general';
@@ -132,8 +134,30 @@ const TaskEditorScreenWrapper = () => {
   } = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
   const { task, error, loading } = useTask(taskId);
 
+  const navigation = useNavigation();
+
+  const goBack = React.useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
+  if (error) {
+    return (
+      <UniversalError
+        errorText="Something went wrong. Probably task was not found"
+        buttonText="Go Back"
+        onHandleError={goBack}
+      />
+    );
+  }
+
   if (loading) {
-    return <View />;
+    return (
+      <UniversalLoading
+        loadingText="Task is loading..."
+        buttonText="Go Back"
+        onHandleLoading={goBack}
+      />
+    );
   }
 
   return <TaskEditorScreen task={task!} />;

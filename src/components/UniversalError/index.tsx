@@ -9,11 +9,7 @@ interface IProps {
   onHandleError: () => void;
 }
 
-const UniversalErrorComponent = ({
-  errorText,
-  buttonText,
-  onHandleError,
-}: IProps) => {
+const UniversalError = ({ errorText, buttonText, onHandleError }: IProps) => {
   return (
     <View style={styles.container}>
       <Image
@@ -30,4 +26,4 @@ const UniversalErrorComponent = ({
   );
 };
 
-export default UniversalErrorComponent;
+export default UniversalError;

@@ -1,6 +1,8 @@
 import CustomButton from '@components/CustomButton';
 import Header from '@components/headers/Header';
 import TaskFileList from '@components/TaskFileList';
+import UniversalError from '@components/UniversalError';
+import UniversalLoading from '@components/UniversalLoading';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
 import { ITask } from '@interfaces/general';
@@ -88,8 +90,30 @@ const TaskDetailsScreenWrapper = () => {
   } = useRoute<RouteProp<AppStackParamList, ERouteNames.TASK_DETAILS>>();
   const { task, error, loading } = useTask(taskId);
 
+  const navigation = useNavigation();
+
+  const goBack = React.useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
+  if (error) {
+    return (
+      <UniversalError
+        errorText="Something went wrong. Probably task was not found"
+        buttonText="Go to Task List"
+        onHandleError={goBack}
+      />
+    );
+  }
+
   if (loading) {
-    return <View />;
+    return (
+      <UniversalLoading
+        loadingText="Task is loading..."
+        buttonText="Go to Task List"
+        onHandleLoading={goBack}
+      />
+    );
   }
 
   return <TaskDetailsScreen task={task!} />;
