@@ -84,10 +84,10 @@ export const fetchMoreCommonTasksAsyncAction = createAsyncThunk<
       const res = await fetchCommonTaskApi(page);
       const tasks = res.tasks;
       dispatch(addCommonTasksAction({ tasks: tasks }));
-      dispatch(setErrorAction({ error: undefined }));
+      dispatch(setMoreCommonTasksError({ error: undefined }));
       dispatch(setCommonTasksPageAction({ page: page + 1 }));
     } catch (e: any) {
-      dispatch(setErrorAction({ error: e }));
+      dispatch(setMoreCommonTasksError({ error: e }));
       console.log('commonTasks::fetchMoreCommonTasksAsyncAction error:', e);
     } finally {
       dispatch(setMoreCommonTasksLoading({ loading: false }));
