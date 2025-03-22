@@ -54,7 +54,7 @@ const allTasksReducer = createReducer<ICommonTasksReducerState>(
       }))
       .addCase(setMoreCommonTasksError, (store, { payload: { error } }) => ({
         ...store,
-        setMoreCommonTasksError: error,
+        moreCommonTasksError: error,
       }))
       .addCase(
         setMoreCommonTasksLoading,
