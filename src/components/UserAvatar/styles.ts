@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     alignSelf: 'center',
-    position: 'relative', // Чтобы дочерние элементы могли использовать absolute
+    position: 'relative',
   },
   avatar: {
     width: 150,
