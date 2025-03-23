@@ -1,16 +1,22 @@
-import { signInApi, signUpApi } from '@api/authApi';
+import { logoutApi, signInApi, signUpApi } from '@api/authApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { TRootState } from '@store';
 import { handleErrorResponse } from '@utils/errorHandlers';
 import { Alert } from 'react-native';
 import {
   ISetAccessTokenAction,
   ISetLoadingAction,
+  ISetRefreshTokenAction,
   ISignInAsyncAction,
   ISignUpAsyncAction,
 } from '../../interfaces/actions/authActions';
 
 export const setAccessTokenAction = createAction<ISetAccessTokenAction>(
   'auth/setAccessTokenAction',
+);
+
+export const setRefreshTokenAction = createAction<ISetRefreshTokenAction>(
+  'auth/setRefreshTokenAction',
 );
 
 export const setLoadingAction = createAction<ISetLoadingAction>(
@@ -23,8 +29,17 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await signInApi(email.toLowerCase(), password);
-      if (res.token) {
-        dispatch(setAccessTokenAction({ accessToken: res.token }));
+      if (res.tokens) {
+        if (res.tokens.accessToken) {
+          dispatch(
+            setAccessTokenAction({ accessToken: res.tokens.accessToken }),
+          );
+        }
+        if (res.tokens.refreshToken) {
+          dispatch(
+            setRefreshTokenAction({ refreshToken: res.tokens.refreshToken }),
+          );
+        }
       }
       if (onSuccess) {
         onSuccess();
@@ -58,8 +73,17 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
         return;
       }
       const res = await signUpApi(email.toLowerCase(), name, password, avatar);
-      if (res.token) {
-        dispatch(setAccessTokenAction({ accessToken: res.token }));
+      if (res.tokens) {
+        if (res.tokens.accessToken) {
+          dispatch(
+            setAccessTokenAction({ accessToken: res.tokens.accessToken }),
+          );
+        }
+        if (res.tokens.refreshToken) {
+          dispatch(
+            setRefreshTokenAction({ refreshToken: res.tokens.refreshToken }),
+          );
+        }
       }
       if (onSuccess) {
         onSuccess();
@@ -72,3 +96,22 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
     }
   },
 );
+
+export const logoutAsyncAction = createAsyncThunk<
+  void,
+  void,
+  { state: TRootState }
+>('auth/logoutAsyncAction', async (_, { getState, dispatch }) => {
+  try {
+    const refreshToken = getState().auth.refreshToken;
+    if (refreshToken) {
+      const res = await logoutApi(refreshToken);
+      if (res.isDone) {
+        dispatch(setRefreshTokenAction({ refreshToken: undefined }));
+        dispatch(setAccessTokenAction({ accessToken: undefined }));
+      }
+    }
+  } catch (e: any) {
+    console.log('authActions::logoutAsyncAction error:', e);
+  }
+});

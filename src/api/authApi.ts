@@ -1,10 +1,30 @@
+import { BASE_URL } from '@constants';
 import { INewFile } from '@interfaces/general';
+import axios from 'axios';
 import axiosInstance from './axios';
 
 export const signInApi = async (email: string, password: string) => {
   const res = await axiosInstance.post('/users/login', {
     email: email,
     password: password,
+    accessTokenExpiresIn: '10s',
+    refreshTokenExpiresIn: '20s',
+  });
+  return res.data;
+};
+
+export const refreshApi = async (refreshToken: string) => {
+  const res = await axios.post(`${BASE_URL}/users/refresh`, {
+    refreshToken: refreshToken,
+    accessTokenExpiresIn: '10s',
+    refreshTokenExpiresIn: '20s',
+  });
+  return res.data;
+};
+
+export const logoutApi = async (refreshToken: string) => {
+  const res = await axios.post(`${BASE_URL}/users/logout`, {
+    refreshToken: refreshToken,
   });
   return res.data;
 };

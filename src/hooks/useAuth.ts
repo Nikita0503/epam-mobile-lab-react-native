@@ -1,5 +1,5 @@
 import {
-  setAccessTokenAction,
+  logoutAsyncAction,
   signInAsyncAction,
   signUpAsyncAction,
 } from '@actions/authActions';
@@ -45,7 +45,7 @@ const useAuth = () => {
   );
 
   const logout = React.useCallback(() => {
-    dispatch(setAccessTokenAction({ accessToken: undefined }));
+    dispatch(logoutAsyncAction());
   }, []);
 
   return {
