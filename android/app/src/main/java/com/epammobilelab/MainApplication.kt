@@ -1,4 +1,4 @@
-package com.epammobilelab
+package app.epam.reactnative.lab
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -1,4 +1,4 @@
-package com.epammobilelab
+package app.epam.reactnative.lab
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
