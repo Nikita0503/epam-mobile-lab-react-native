@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524209870178",
+    "project_id": "epam-react-native-lab",
+    "storage_bucket": "epam-react-native-lab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524209870178:android:a2c825bcfb39c9aa51c83b",
+        "android_client_info": {
+          "package_name": "app.epam.reactnative.lab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYA07YwE96h2PGWy8Y1oDqglcwl02_c50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
