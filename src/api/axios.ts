@@ -31,9 +31,8 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError) => {
-    const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    const originalRequest = error.config!;
+    if (error.response?.status === 401) {
       const refreshToken = store.getState().auth.refreshToken;
       try {
         if (!refreshToken) {
