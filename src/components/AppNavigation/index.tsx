@@ -14,6 +14,7 @@ import TaskDetailsScreen from '@screens/TaskDetailsScreen';
 import TaskEditorScreen from '@screens/TaskEditorScreen';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
+import { navigationRef } from './RootNavigation';
 import styles from './styles';
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
@@ -24,7 +25,7 @@ const AppNavigation = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         {!accessToken ? (
           <AuthStack.Navigator screenOptions={{ headerShown: false }}>
             <AuthStack.Screen

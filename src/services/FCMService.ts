@@ -1,3 +1,6 @@
+import { getNavigation } from '@components/AppNavigation/RootNavigation';
+import { ERouteNames } from '@interfaces/navigation/routeNames';
+import { EPushNotificationType } from '@interfaces/pushNotifications';
 import messaging from '@react-native-firebase/messaging';
 import { PermissionsAndroid, Platform } from 'react-native';
 
@@ -53,8 +56,22 @@ async function requestPermission() {
 }
 
 export const onClickToNotification = (remoteMessage: any) => {
+  console.log({ remoteMessage });
   if (remoteMessage) {
-    console.log({ remoteMessage });
+    if (
+      remoteMessage.data.taskId &&
+      (remoteMessage.data.type === EPushNotificationType.TASK_CREATED ||
+        remoteMessage.data.type === EPushNotificationType.TASK_UPDATED)
+    ) {
+      console.log({
+        taskId: remoteMessage.data.taskId,
+        type: remoteMessage.data.type,
+      });
+      const navigation = getNavigation();
+      navigation.navigate(ERouteNames.TASK_DETAILS, {
+        taskId: remoteMessage.data.taskId,
+      });
+    }
   }
 };
 
