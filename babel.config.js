@@ -20,6 +20,7 @@ module.exports = {
           '@hooks': './src/hooks',
           '@utils': './src/utils',
           '@images': './src/assets',
+          '@services': './src/services',
         },
       },
     ],
