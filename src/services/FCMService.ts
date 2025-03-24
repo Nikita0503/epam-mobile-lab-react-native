@@ -1,13 +1,22 @@
+import { fetchTasksAsyncAction } from '@actions/tasksActions';
 import { getNavigation } from '@components/AppNavigation/RootNavigation';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { EPushNotificationType } from '@interfaces/pushNotifications';
 import messaging from '@react-native-firebase/messaging';
+import store from '@store';
 import { PermissionsAndroid, Platform } from 'react-native';
 
 export const onStartBackgroundHandler = () => {
   //receiving messages in the background
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     console.log('[FCM]', 'Message handled in the background!', remoteMessage);
+    if (
+      remoteMessage.data?.type === EPushNotificationType.TASK_CREATED ||
+      remoteMessage.data?.type === EPushNotificationType.TASK_UPDATED ||
+      remoteMessage.data?.type === EPushNotificationType.TASK_DELETED
+    ) {
+      store.dispatch(fetchTasksAsyncAction());
+    }
   });
   onClickNotificationFromBackground();
   onClickNotificationFromQuit();
@@ -58,9 +67,9 @@ async function requestPermission() {
 export const onClickToNotification = (remoteMessage: any) => {
   if (remoteMessage) {
     if (
-      remoteMessage.data.taskId &&
-      (remoteMessage.data.type === EPushNotificationType.TASK_CREATED ||
-        remoteMessage.data.type === EPushNotificationType.TASK_UPDATED)
+      remoteMessage.data?.taskId &&
+      (remoteMessage.data?.type === EPushNotificationType.TASK_CREATED ||
+        remoteMessage.data?.type === EPushNotificationType.TASK_UPDATED)
     ) {
       console.log({
         taskId: remoteMessage.data.taskId,
