@@ -2,6 +2,7 @@ import { logoutApi, signInApi, signUpApi } from '@api/authApi';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { TRootState } from '@store';
 import { handleErrorResponse } from '@utils/errorHandlers';
+import { getFCMToken } from '@utils/helpers';
 import { Alert } from 'react-native';
 import {
   ISetAccessTokenAction,
@@ -28,7 +29,8 @@ export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
   async ({ email, password, onSuccess }: ISignInAsyncAction, { dispatch }) => {
     try {
       dispatch(setLoadingAction({ loading: true }));
-      const res = await signInApi(email.toLowerCase(), password);
+      const fcmToken = await getFCMToken();
+      const res = await signInApi(email.toLowerCase(), password, fcmToken);
       if (res.tokens) {
         if (res.tokens.accessToken) {
           dispatch(
@@ -72,7 +74,14 @@ export const signUpAsyncAction = createAsyncThunk<void, ISignUpAsyncAction>(
         Alert.alert('Passwords do not match');
         return;
       }
-      const res = await signUpApi(email.toLowerCase(), name, password, avatar);
+      const fcmToken = await getFCMToken();
+      const res = await signUpApi(
+        email.toLowerCase(),
+        name,
+        password,
+        avatar,
+        fcmToken,
+      );
       if (res.tokens) {
         if (res.tokens.accessToken) {
           dispatch(
@@ -105,7 +114,8 @@ export const logoutAsyncAction = createAsyncThunk<
   try {
     const refreshToken = getState().auth.refreshToken;
     if (refreshToken) {
-      const res = await logoutApi(refreshToken);
+      const fcmToken = await getFCMToken();
+      const res = await logoutApi(refreshToken, fcmToken);
       if (res.isDone) {
         dispatch(setRefreshTokenAction({ refreshToken: undefined }));
         dispatch(setAccessTokenAction({ accessToken: undefined }));

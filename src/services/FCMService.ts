@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import { PermissionsAndroid, Platform } from 'react-native';
 
@@ -21,21 +20,15 @@ export const checkPermission = async () => {
   const enabled = await messaging().hasPermission();
   if (enabled === messaging.AuthorizationStatus.AUTHORIZED) {
     console.log('[FCM]', 'Push notifications permission is enabled!');
-    await getToken();
   } else {
     console.log('[FCM]', 'Push notifications permission is disabled!');
     await requestPermission();
   }
+  return enabled;
 };
 
 export const getToken = async () => {
-  let fcmToken = await AsyncStorage.getItem('fcmToken');
-  if (!fcmToken) {
-    fcmToken = await messaging().getToken();
-    if (fcmToken) {
-      await AsyncStorage.setItem('fcmToken', fcmToken);
-    }
-  }
+  let fcmToken = await messaging().getToken();
   console.log('[FCM]', 'Firebase Push Notifications Token:', fcmToken);
   return fcmToken;
 };
