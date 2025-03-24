@@ -6,6 +6,8 @@ export const onStartBackgroundHandler = () => {
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     console.log('[FCM]', 'Message handled in the background!', remoteMessage);
   });
+  onClickNotificationFromBackground();
+  onClickNotificationFromQuit();
 };
 
 export const unsubscribe = () => {
@@ -48,4 +50,22 @@ async function requestPermission() {
   } catch (error) {
     console.log('[FCM]', 'Push notifications permission is rejected');
   }
+}
+
+export const onClickToNotification = (remoteMessage: any) => {
+  if (remoteMessage) {
+    console.log({ remoteMessage });
+  }
+};
+
+export function onClickNotificationFromBackground() {
+  //when user click to notification from background state
+  messaging().onNotificationOpenedApp(message =>
+    onClickToNotification(message),
+  );
+}
+
+export function onClickNotificationFromQuit() {
+  //when user click to notification from quit state
+  messaging().getInitialNotification().then(onClickToNotification);
 }

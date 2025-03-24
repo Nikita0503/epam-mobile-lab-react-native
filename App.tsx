@@ -11,6 +11,7 @@ import styles from './styles';
 const App = () => {
   React.useEffect(() => {
     FCMService.checkPermission();
+    FCMService.onStartBackgroundHandler();
     const unsubscribe = FCMService.unsubscribe();
     return unsubscribe;
   }, []);
