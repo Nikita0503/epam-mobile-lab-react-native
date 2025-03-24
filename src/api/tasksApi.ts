@@ -24,7 +24,11 @@ export const createTaskApi = async (
       formData.append('file', files[i]);
     }
   }
-  const res = await axiosInstance.post('/tasks', formData);
+  const res = await axiosInstance.post('/tasks', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return res.data;
 };
 
@@ -42,7 +46,11 @@ export const updateTaskApi = async (
       formData.append('file', files[i]);
     }
   }
-  const res = await axiosInstance.put(`/tasks/${taskId}`, formData);
+  const res = await axiosInstance.put(`/tasks/${taskId}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return res.data;
 };
 

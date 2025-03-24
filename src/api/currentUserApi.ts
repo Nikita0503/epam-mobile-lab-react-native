@@ -15,7 +15,11 @@ export const updateCurrentUserApi = async (
   if (avatar) {
     formData.append('avatar', avatar);
   }
-  const res = await axiosInstance.put('/users', formData);
+  const res = await axiosInstance.put('/users', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return res.data;
 };
 

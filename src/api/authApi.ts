@@ -42,6 +42,10 @@ export const signUpApi = async (
   if (avatar) {
     formData.append('avatar', avatar);
   }
-  const res = await axiosInstance.post('/users/registration', formData);
+  const res = await axiosInstance.post('/users/registration', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return res.data;
 };
