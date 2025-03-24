@@ -7,8 +7,8 @@ export const signInApi = async (email: string, password: string) => {
   const res = await axiosInstance.post('/users/login', {
     email: email,
     password: password,
-    accessTokenExpiresIn: '10s',
-    refreshTokenExpiresIn: '20s',
+    accessTokenExpiresIn: '15m',
+    refreshTokenExpiresIn: '1h',
   });
   return res.data;
 };
@@ -16,8 +16,8 @@ export const signInApi = async (email: string, password: string) => {
 export const refreshApi = async (refreshToken: string) => {
   const res = await axios.post(`${BASE_URL}/users/refresh`, {
     refreshToken: refreshToken,
-    accessTokenExpiresIn: '10s',
-    refreshTokenExpiresIn: '20s',
+    accessTokenExpiresIn: '15m',
+    refreshTokenExpiresIn: '1h',
   });
   return res.data;
 };
