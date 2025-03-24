@@ -56,7 +56,6 @@ async function requestPermission() {
 }
 
 export const onClickToNotification = (remoteMessage: any) => {
-  console.log({ remoteMessage });
   if (remoteMessage) {
     if (
       remoteMessage.data.taskId &&
