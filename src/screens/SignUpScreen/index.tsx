@@ -68,6 +68,7 @@ const SignUpScreen = () => {
               onChangeText={setPassword}
               hintTextStyle={styles.textInputTitle}
               textInputStyle={styles.textInput}
+              secureTextEntry={true}
             />
           </View>
           <View style={styles.textInputContainer}>
@@ -77,6 +78,7 @@ const SignUpScreen = () => {
               onChangeText={setRepeatPassword}
               hintTextStyle={styles.textInputTitle}
               textInputStyle={styles.textInput}
+              secureTextEntry={true}
             />
           </View>
         </View>
