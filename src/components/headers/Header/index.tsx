@@ -21,11 +21,15 @@ const Header = ({ title, actionButton, hideBackButton }: IProps) => {
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   const onPressBackButton = React.useCallback(() => {
-    // needs to handle universal links proccess
-    navigation.reset({
-      index: 0,
-      routes: [{ name: ERouteNames.TABS_SCREEN }],
-    });
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      // need to handle universal links proccess
+      navigation.reset({
+        index: 0,
+        routes: [{ name: ERouteNames.TABS_SCREEN }],
+      });
+    }
   }, [navigation]);
 
   return (
