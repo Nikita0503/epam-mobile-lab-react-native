@@ -1,3 +1,4 @@
+import { Colors } from '@theme/colors';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     borderColor: '#DADBDD',
     paddingHorizontal: 12,
     height: 50,
+    color: Colors.black,
   },
 });
 
