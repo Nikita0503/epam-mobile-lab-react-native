@@ -1,6 +1,6 @@
 import { fetchCurrentUserAsyncAction } from '@actions/currentUserActions';
 import { fetchTasksAsyncAction } from '@actions/tasksActions';
-import { getNavigation } from '@components/AppNavigation/RootNavigation';
+import { navigate } from '@components/AppNavigation/RootNavigation';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { EPushNotificationType } from '@interfaces/pushNotifications';
 import messaging from '@react-native-firebase/messaging';
@@ -76,23 +76,15 @@ export const onClickToNotification = (remoteMessage: any) => {
       (remoteMessage.data?.type === EPushNotificationType.TASK_CREATED ||
         remoteMessage.data?.type === EPushNotificationType.TASK_UPDATED)
     ) {
-      setTimeout(() => {
-        // android needs some delay... FIXME
-        const navigation = getNavigation();
-        navigation.navigate(ERouteNames.TASK_DETAILS, {
-          taskId: remoteMessage.data.taskId,
-        });
-      }, 250);
+      navigate(ERouteNames.TASK_DETAILS, {
+        taskId: remoteMessage.data.taskId,
+      });
     } else if (
       remoteMessage.data?.type === EPushNotificationType.PROFILE_UPDATED
     ) {
-      setTimeout(() => {
-        // android needs some delay... FIXME
-        const navigation = getNavigation();
-        navigation.navigate(ERouteNames.TABS_SCREEN, {
-          screen: ERouteNames.CURRENT_USER,
-        });
-      }, 250);
+      navigate(ERouteNames.TABS_SCREEN, {
+        screen: ERouteNames.CURRENT_USER,
+      });
     }
   }
 };
