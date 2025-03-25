@@ -1,3 +1,4 @@
+import useDeepLinking from '@hooks/useDeepLinking';
 import CommonTasksScreenTabActive from '@images/icons/tabs/CommonTasksScreenTabActive';
 import CommonTasksScreenTabInactive from '@images/icons/tabs/CommonTasksScreenTabInactive';
 import ProfileScreenTabActive from '@images/icons/tabs/ProfileScreenTabActive';
@@ -15,6 +16,8 @@ import React from 'react';
 const TabsStack = createBottomTabNavigator<TabsStackParamList>();
 
 const Tabs = () => {
+  useDeepLinking();
+
   return (
     <TabsStack.Navigator screenOptions={{ headerShown: false }}>
       <TabsStack.Screen

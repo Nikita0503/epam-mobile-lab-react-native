@@ -1,6 +1,8 @@
 import { ERouteNames } from '@interfaces/navigation/routeNames';
+import { LinkingOptions } from '@react-navigation/native';
+import { Linking } from 'react-native';
 
-export const linking: any = {
+export const linking: LinkingOptions<any> = {
   prefixes: ['https://epam-react-native-lab.web.app'],
   config: {
     screens: {
@@ -11,5 +13,14 @@ export const linking: any = {
         },
       },
     },
+  },
+  async getInitialURL() {
+    const url = await Linking.getInitialURL();
+    return url;
+  },
+  subscribe(listener) {
+    const onReceiveURL = ({ url }: { url: string }) => listener(url);
+    Linking.addEventListener('url', onReceiveURL);
+    return () => Linking.removeAllListeners('url');
   },
 };
