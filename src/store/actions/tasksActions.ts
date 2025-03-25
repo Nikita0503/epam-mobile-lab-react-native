@@ -50,7 +50,7 @@ export const fetchTasksAsyncAction = createAsyncThunk(
     try {
       dispatch(setLoadingAction({ loading: true }));
       const res = await fetchTasksApi();
-      const tasks = res.tasks.reverse();
+      const tasks = res.tasks;
       dispatch(setTasksAction({ tasks: tasks }));
       dispatch(setErrorAction({ error: undefined }));
     } catch (e: any) {
