@@ -58,6 +58,7 @@ export const updateCurrentUserAsyncAction = createAsyncThunk<
       if (avatar === undefined) {
         await deleteCurrentUserAvatarApi();
       } else if (
+        avatar !== null &&
         typeof avatar !== 'string' &&
         'type' in avatar &&
         'uri' in avatar
