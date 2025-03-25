@@ -1,3 +1,4 @@
+import { fetchCurrentUserAsyncAction } from '@actions/currentUserActions';
 import { fetchTasksAsyncAction } from '@actions/tasksActions';
 import { getNavigation } from '@components/AppNavigation/RootNavigation';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
@@ -16,6 +17,10 @@ export const onStartBackgroundHandler = () => {
       remoteMessage.data?.type === EPushNotificationType.TASK_DELETED
     ) {
       store.dispatch(fetchTasksAsyncAction());
+    } else if (
+      remoteMessage.data?.type === EPushNotificationType.PROFILE_UPDATED
+    ) {
+      store.dispatch(fetchCurrentUserAsyncAction());
     }
   });
   onClickNotificationFromBackground();
@@ -71,13 +76,16 @@ export const onClickToNotification = (remoteMessage: any) => {
       (remoteMessage.data?.type === EPushNotificationType.TASK_CREATED ||
         remoteMessage.data?.type === EPushNotificationType.TASK_UPDATED)
     ) {
-      console.log({
-        taskId: remoteMessage.data.taskId,
-        type: remoteMessage.data.type,
-      });
       const navigation = getNavigation();
       navigation.navigate(ERouteNames.TASK_DETAILS, {
         taskId: remoteMessage.data.taskId,
+      });
+    } else if (
+      remoteMessage.data?.type === EPushNotificationType.PROFILE_UPDATED
+    ) {
+      const navigation = getNavigation();
+      navigation.navigate(ERouteNames.TABS_SCREEN, {
+        screen: ERouteNames.CURRENT_USER,
       });
     }
   }
