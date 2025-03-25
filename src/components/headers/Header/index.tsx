@@ -1,8 +1,9 @@
-import React from 'react';
-import {Pressable, Text, View} from 'react-native';
 import BackButtonSvgImage from '@images/icons/BackButtonSvgImage';
-import {AppStackParamList} from '@interfaces/navigation/routeParams';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import { ERouteNames } from '@interfaces/navigation/routeNames';
+import { AppStackParamList } from '@interfaces/navigation/routeParams';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Pressable, Text, View } from 'react-native';
 import styles from './styles';
 
 interface IActionButton {
@@ -16,18 +17,19 @@ interface IProps {
   hideBackButton?: boolean;
 }
 
-const Header = ({title, actionButton, hideBackButton}: IProps) => {
+const Header = ({ title, actionButton, hideBackButton }: IProps) => {
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
   const onPressBackButton = React.useCallback(() => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
+    navigation.reset({
+      index: 0,
+      routes: [{ name: ERouteNames.TABS_SCREEN }],
+    });
   }, [navigation]);
 
   return (
     <View style={styles.container}>
-      {!hideBackButton && navigation.canGoBack() && (
+      {!hideBackButton && (
         <Pressable style={styles.backButton} onPress={onPressBackButton}>
           <BackButtonSvgImage />
         </Pressable>
