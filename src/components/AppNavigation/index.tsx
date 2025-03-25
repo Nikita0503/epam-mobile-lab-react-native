@@ -12,6 +12,7 @@ import SignUpScreen from '@screens/SignUpScreen';
 import TaskCreatorScreen from '@screens/TaskCreatorScreen';
 import TaskDetailsScreen from '@screens/TaskDetailsScreen';
 import TaskEditorScreen from '@screens/TaskEditorScreen';
+import { linking } from '@utils/navigation';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { navigationRef } from './RootNavigation';
@@ -25,7 +26,7 @@ const AppNavigation = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer ref={navigationRef} linking={linking}>
         {!accessToken ? (
           <AuthStack.Navigator screenOptions={{ headerShown: false }}>
             <AuthStack.Screen
