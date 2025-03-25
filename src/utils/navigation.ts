@@ -7,7 +7,7 @@ export const linking: any = {
       [ERouteNames.TASK_DETAILS]: 'task/:taskId',
       [ERouteNames.TABS_SCREEN]: {
         screens: {
-          CurrentUserScreen: 'profile',
+          [ERouteNames.CURRENT_USER]: 'profile',
         },
       },
     },
