@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   contentContainerStyle: {
     paddingHorizontal: 14,
     marginTop: 12,
-    paddingBottom: 12,
+    paddingBottom: 24,
   },
 });
 
