@@ -76,17 +76,23 @@ export const onClickToNotification = (remoteMessage: any) => {
       (remoteMessage.data?.type === EPushNotificationType.TASK_CREATED ||
         remoteMessage.data?.type === EPushNotificationType.TASK_UPDATED)
     ) {
-      const navigation = getNavigation();
-      navigation.navigate(ERouteNames.TASK_DETAILS, {
-        taskId: remoteMessage.data.taskId,
-      });
+      setTimeout(() => {
+        // android needs some delay... FIXME
+        const navigation = getNavigation();
+        navigation.navigate(ERouteNames.TASK_DETAILS, {
+          taskId: remoteMessage.data.taskId,
+        });
+      }, 250);
     } else if (
       remoteMessage.data?.type === EPushNotificationType.PROFILE_UPDATED
     ) {
-      const navigation = getNavigation();
-      navigation.navigate(ERouteNames.TABS_SCREEN, {
-        screen: ERouteNames.CURRENT_USER,
-      });
+      setTimeout(() => {
+        // android needs some delay... FIXME
+        const navigation = getNavigation();
+        navigation.navigate(ERouteNames.TABS_SCREEN, {
+          screen: ERouteNames.CURRENT_USER,
+        });
+      }, 250);
     }
   }
 };
