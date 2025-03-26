@@ -2,6 +2,7 @@ import {
   createTaskAsyncAction,
   deleteTaskAsyncAction,
   fetchTasksAsyncAction,
+  patchTaskAsyncAction,
   updateTaskAsyncAction,
 } from '@actions/tasksActions';
 import { IFile, INewFile, ITask } from '@interfaces/general';
@@ -52,6 +53,7 @@ const useTasks = () => {
       taskId: number,
       title: string,
       description: string,
+      done: boolean,
       files: INewFile[],
       oldFiles: IFile[],
       onSuccess?: () => void,
@@ -61,6 +63,32 @@ const useTasks = () => {
           taskId: taskId,
           title: title,
           description: description,
+          done: done,
+          files: files,
+          oldFiles: oldFiles,
+          onSuccess: onSuccess,
+        }),
+      );
+    },
+    [],
+  );
+
+  const patchTask = React.useCallback(
+    (
+      taskId: number,
+      title: string | undefined,
+      description: string | undefined,
+      done: boolean | undefined,
+      files: INewFile[],
+      oldFiles: IFile[],
+      onSuccess?: () => void,
+    ) => {
+      dispatch(
+        patchTaskAsyncAction({
+          taskId: taskId,
+          title: title,
+          description: description,
+          done: done,
           files: files,
           oldFiles: oldFiles,
           onSuccess: onSuccess,
@@ -89,6 +117,7 @@ const useTasks = () => {
     fetchTasks,
     createTask,
     updateTask,
+    patchTask,
     deleteTask,
   };
 };

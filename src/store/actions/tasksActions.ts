@@ -3,12 +3,14 @@ import {
   createTaskApi,
   deleteTaskApi,
   fetchTasksApi,
+  patchTaskApi,
   updateTaskApi,
 } from '@api/tasksApi';
 import {
   IAddTaskAction,
   ICreateTaskAsyncAction,
   IDeleteTaskAsyncAction,
+  IPatchTaskAsyncAction,
   IRemoveTaskAction,
   ISetError,
   ISetLoadingAction,
@@ -98,6 +100,7 @@ export const updateTaskAsyncAction = createAsyncThunk<
       taskId,
       title,
       description,
+      done,
       files,
       oldFiles,
       onSuccess,
@@ -116,7 +119,7 @@ export const updateTaskAsyncAction = createAsyncThunk<
           await deleteFileApi(deletedFiles[i].id);
         }
       }
-      const res = await updateTaskApi(taskId, title, description, files);
+      const res = await updateTaskApi(taskId, title, description, done, files);
       console.log('Updated Task: ', res);
       dispatch(fetchTasksAsyncAction());
       if (onSuccess) {
@@ -124,6 +127,50 @@ export const updateTaskAsyncAction = createAsyncThunk<
       }
     } catch (e: any) {
       console.log('tasksActions::updateTaskAsyncAction error:', e);
+      handleErrorResponse(e);
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  },
+);
+
+export const patchTaskAsyncAction = createAsyncThunk<
+  void,
+  IPatchTaskAsyncAction
+>(
+  'tasks/patchTaskAsyncAction',
+  async (
+    {
+      taskId,
+      title,
+      description,
+      done,
+      files,
+      oldFiles,
+      onSuccess,
+    }: IPatchTaskAsyncAction,
+    { getState, dispatch },
+  ) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const state: TRootState = getState() as TRootState;
+      const taskInfo: ITask | undefined = taskInfoSelector(taskId)(state);
+      if (taskInfo && oldFiles) {
+        const deletedFiles = taskInfo.files.filter(
+          file => !oldFiles.some(oldFile => oldFile.name === file.name),
+        );
+        for (let i = 0; i < deletedFiles.length; i++) {
+          await deleteFileApi(deletedFiles[i].id);
+        }
+      }
+      const res = await patchTaskApi(taskId, title, description, done, files);
+      console.log('Patched Task: ', res);
+      dispatch(fetchTasksAsyncAction());
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (e: any) {
+      console.log('tasksActions::patchTaskAsyncAction error:', e);
       handleErrorResponse(e);
     } finally {
       dispatch(setLoadingAction({ loading: false }));

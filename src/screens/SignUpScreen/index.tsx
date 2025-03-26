@@ -11,10 +11,11 @@ import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import styles from './styles';
 
 const SignUpScreen = () => {
-  const [email, setEmail] = React.useState<string>('');
-  const [name, setName] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [repeatPassword, setRepeatPassword] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('example@gmail.com');
+  const [name, setName] = React.useState<string>('Example');
+  const [password, setPassword] = React.useState<string>('Password12345');
+  const [repeatPassword, setRepeatPassword] =
+    React.useState<string>('Password12345');
   const [avatar, setAvatar] = React.useState<INewFile | undefined>(undefined);
 
   const { signUp } = useAuth();

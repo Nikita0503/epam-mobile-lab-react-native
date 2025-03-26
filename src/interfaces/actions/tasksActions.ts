@@ -35,8 +35,19 @@ export interface IUpdateTaskAsyncAction {
   taskId: number;
   title: string;
   description: string;
+  done: boolean;
   files: INewFile[];
   oldFiles: IFile[];
+  onSuccess?: () => void;
+}
+
+export interface IPatchTaskAsyncAction {
+  taskId: number;
+  title: string | undefined;
+  description: string | undefined;
+  done: boolean | undefined;
+  files?: INewFile[];
+  oldFiles?: IFile[];
   onSuccess?: () => void;
 }
 

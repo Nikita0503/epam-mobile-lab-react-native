@@ -16,9 +16,13 @@ interface IProps {
 }
 
 const TaskListItem = ({ task }: IProps) => {
-  const { deleteTask } = useTasks();
+  const { deleteTask, patchTask } = useTasks();
 
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
+
+  const onMakeAsDonePress = React.useCallback(() => {
+    patchTask(task.id, undefined, undefined, !task.done, [], []);
+  }, [task]);
 
   const goToTaskDetails = React.useCallback(() => {
     navigation.navigate(ERouteNames.TASK_DETAILS, { taskId: task.id });
@@ -45,14 +49,14 @@ const TaskListItem = ({ task }: IProps) => {
 
   return (
     <TouchableOpacity onPress={goToTaskDetails} style={styles.container}>
-      <Pressable style={styles.taskStatusContainer} onPress={() => {}}>
-        {task.completed ? <TaskCompletedSvgImage /> : <TaskActiveSvgImage />}
+      <Pressable style={styles.taskStatusContainer} onPress={onMakeAsDonePress}>
+        {task.done ? <TaskCompletedSvgImage /> : <TaskActiveSvgImage />}
       </Pressable>
       <View style={styles.content}>
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[styles.titleText, task.completed && styles.titleTextThrough]}>
+          style={[styles.titleText, task.done && styles.titleTextThrough]}>
           {task.title}
         </Text>
 
