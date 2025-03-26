@@ -41,6 +41,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
+  taskStatusContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: 20,
+    flexDirection: 'row',
+  },
+  taskStatusText: {
+    fontSize: 16,
+    marginRight: 8,
+  },
 });
 
 export default styles;

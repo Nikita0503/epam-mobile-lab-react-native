@@ -6,6 +6,8 @@ import UniversalError from '@components/UniversalError';
 import UniversalLoading from '@components/UniversalLoading';
 import useTask from '@hooks/useTask';
 import useTasks from '@hooks/useTasks';
+import TaskActiveSvgImage from '@images/icons/TaskActiveSvgImage';
+import TaskCompletedSvgImage from '@images/icons/TaskCompletedSvgImage';
 import { IFile, INewFile, ITask } from '@interfaces/general';
 import { ERouteNames } from '@interfaces/navigation/routeNames';
 import { AppStackParamList } from '@interfaces/navigation/routeParams';
@@ -15,7 +17,9 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
+  Text,
   View,
 } from 'react-native';
 import styles from './styles';
@@ -29,6 +33,7 @@ const TaskEditorScreen = ({ task }: IProps) => {
   const [description, setDescription] = React.useState<string>(
     task.description,
   );
+  const [done, setDone] = React.useState<boolean>(task.done);
   const [oldFiles, setOldFiles] = React.useState<IFile[]>(task.files);
   const [newFiles, setNewFiles] = React.useState<INewFile[]>([]);
 
@@ -40,13 +45,25 @@ const TaskEditorScreen = ({ task }: IProps) => {
 
   const navigation = useNavigation();
 
+  const onSwitchDonePress = React.useCallback(() => {
+    setDone(!done);
+  }, [task, done]);
+
   const goToTasks = React.useCallback(() => {
     navigation.goBack();
   }, []);
 
   const onUpdateTaskPress = React.useCallback(() => {
-    updateTask(task.id, title, description, newFiles, oldFiles, goToTasks);
-  }, [task, title, description, newFiles, oldFiles]);
+    updateTask(
+      task.id,
+      title,
+      description,
+      done,
+      newFiles,
+      oldFiles,
+      goToTasks,
+    );
+  }, [task, title, description, done, newFiles, oldFiles]);
 
   const onDeleteTaskPress = React.useCallback(() => {
     Alert.alert('Are you sure?', 'Do you wanna delete the task?', [
@@ -111,6 +128,12 @@ const TaskEditorScreen = ({ task }: IProps) => {
                 onChangeText={setDescription}
               />
             </View>
+            <Pressable
+              style={styles.taskStatusContainer}
+              onPress={onSwitchDonePress}>
+              <Text style={styles.taskStatusText}>Done</Text>
+              {done ? <TaskCompletedSvgImage /> : <TaskActiveSvgImage />}
+            </Pressable>
             <View style={styles.infoItemContainer}>
               <TaskFileList
                 files={files}

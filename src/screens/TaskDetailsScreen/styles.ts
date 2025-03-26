@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingVertical: 6,
     paddingHorizontal: 8,
+    marginBottom: 8,
   },
   taskStatusContainerDone: {
     backgroundColor: Colors.green,

@@ -20,8 +20,8 @@ const TaskListItem = ({ task }: IProps) => {
 
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
 
-  const onMakeAsDonePress = React.useCallback(() => {
-    patchTask(task.id, undefined, undefined, !task.done, [], []);
+  const onSwitchDonePress = React.useCallback(() => {
+    patchTask(task.id, undefined, undefined, !task.done, [], task.files);
   }, [task]);
 
   const goToTaskDetails = React.useCallback(() => {
@@ -49,7 +49,7 @@ const TaskListItem = ({ task }: IProps) => {
 
   return (
     <TouchableOpacity onPress={goToTaskDetails} style={styles.container}>
-      <Pressable style={styles.taskStatusContainer} onPress={onMakeAsDonePress}>
+      <Pressable style={styles.taskStatusContainer} onPress={onSwitchDonePress}>
         {task.done ? <TaskCompletedSvgImage /> : <TaskActiveSvgImage />}
       </Pressable>
       <View style={styles.content}>
