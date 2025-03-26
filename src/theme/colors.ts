@@ -9,4 +9,7 @@ export const Colors = {
   urgentTaskTypeColor: '#DF7E8D',
   regularTaskTypeColor: '#F8D94F',
   lowTaskTypeColor: '#77D4BD',
+  green: '#008000',
+  red: '#FF0000',
+  blue: '#3d78f0',
 };

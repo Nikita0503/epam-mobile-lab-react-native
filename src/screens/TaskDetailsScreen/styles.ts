@@ -41,6 +41,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
+  taskStatusContainer: {
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+  },
+  taskStatusContainerDone: {
+    backgroundColor: Colors.green,
+  },
+  taskStatusContainerInProgress: {
+    backgroundColor: Colors.blue,
+  },
+  taskStatusText: {
+    fontSize: 14,
+    color: Colors.white,
+  },
 });
 
 export default styles;

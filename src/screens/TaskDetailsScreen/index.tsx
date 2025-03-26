@@ -70,6 +70,17 @@ const TaskDetailsScreen = ({ task }: IProps) => {
         showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{task.title}</Text>
         <Text style={styles.description}>{task.description}</Text>
+        <View
+          style={[
+            styles.taskStatusContainer,
+            task.done
+              ? styles.taskStatusContainerDone
+              : styles.taskStatusContainerInProgress,
+          ]}>
+          <Text style={styles.taskStatusText}>
+            {task.done ? 'DONE' : 'IN PROGRESS'}
+          </Text>
+        </View>
         <TaskFileList files={task.files} />
       </ScrollView>
       <View style={styles.buttonsContainer}>
